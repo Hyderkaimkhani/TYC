@@ -1,0 +1,35 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "com.example.hyder.tuc"
+        minSdkVersion 17
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.mikhaellopez:circularimageview:3.0.1'  // for circular imageview
+    compile files('libs/jackson-annotations-2.4.0.jar') //for JSON
+    compile files('libs/jackson-databind-2.4.6.1.jar')
+    compile files('libs/okhttp-2.3.0.jar')
+    compile 'com.loopj.android:android-async-http:1.4.9'
+    compile files('libs/jackson-core-2.4.6.jar')
+
+
+}

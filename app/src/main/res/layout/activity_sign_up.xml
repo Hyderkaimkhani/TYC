@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.hyder.tuc.SignUp"
+    android:background="#3a5966">
+
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/space2" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/layout_bg"
+        android:id="@+id/relativeLayout"
+        android:paddingBottom="30sp"
+        android:elevation="6dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/et_Fname"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="60dp"
+            android:layout_alignRight="@+id/space"
+            android:layout_alignEnd="@+id/space"
+            android:background="@drawable/edittext"
+            android:hint="First Name"
+            android:gravity="center_vertical|center_horizontal" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/et_Lname"
+            android:layout_marginRight="15dp"
+            android:layout_above="@+id/et_email"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/et_Fname"
+            android:layout_toEndOf="@+id/et_Fname"
+            android:background="@drawable/edittext"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="#86e6e9"
+            android:hint="Last Name" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/et_email"
+            android:layout_below="@+id/et_Fname"
+            android:layout_marginTop="15dp"
+            android:layout_alignLeft="@+id/et_Fname"
+            android:layout_alignStart="@+id/et_Fname"
+            android:layout_alignRight="@+id/et_Lname"
+            android:layout_alignEnd="@+id/et_Lname"
+            android:background="@drawable/edittext"
+            android:drawableLeft="@drawable/email"
+            android:drawablePadding="10dp"
+            android:hint="Email"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp" />
+
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/et_company"
+            android:layout_below="@+id/et_email"
+            android:layout_alignLeft="@+id/et_email"
+            android:layout_alignStart="@+id/et_email"
+            android:layout_alignRight="@+id/et_email"
+            android:layout_alignEnd="@+id/et_email"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/edittext"
+            android:drawableLeft="@drawable/company"
+            android:drawablePadding="10dp"
+            android:hint="Company Name"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"/>
+
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="20px"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/space" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/et_password"
+            android:layout_below="@+id/et_company"
+            android:layout_alignLeft="@+id/et_company"
+            android:layout_alignStart="@+id/et_company"
+            android:layout_alignRight="@+id/et_company"
+            android:layout_alignEnd="@+id/et_company"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/edittext"
+            android:hint="Password"
+            android:drawableLeft="@drawable/lock"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/et_confirmPasword"
+            android:layout_below="@+id/et_password"
+            android:layout_alignLeft="@+id/et_password"
+            android:layout_alignStart="@+id/et_password"
+            android:layout_alignRight="@+id/et_Lname"
+            android:layout_alignEnd="@+id/et_Lname"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/edittext"
+            android:hint="Confirm Password"
+            android:drawableLeft="@drawable/lock"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"/>
+    </RelativeLayout>
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:layout_width="120sp"
+        android:layout_height="120sp"
+        android:id="@+id/iv_register"
+
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/adduser"
+        android:layout_above="@+id/space2"
+        android:layout_marginBottom="120dp"
+        android:elevation="6dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="60sp"
+        android:text="Submit"
+        android:id="@+id/btn_signup"
+        android:background="@drawable/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/relativeLayout"
+        android:layout_alignEnd="@+id/relativeLayout"
+        android:layout_alignLeft="@+id/relativeLayout"
+        android:layout_alignStart="@+id/relativeLayout"
+        android:layout_marginBottom="5dp"
+        android:textColor="#FFF"
+        android:textStyle="bold"
+        android:elevation="6dp" />
+</RelativeLayout>
