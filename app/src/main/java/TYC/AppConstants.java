@@ -5,7 +5,7 @@ package TYC;
  */
 public interface AppConstants {
 
-    String SessionEmail = "hyderali2555@gmail.com";
+    String SessionEmail = "hyderkaimkhani@gmail.com";
     String SessionPassword = "khanhyder25";
 
     String APIKey = "X-DreamFactory-API-key = f60770e7df99ed7c02ec5ef2943780c627793db81b8e51035d522d4057223f8f";

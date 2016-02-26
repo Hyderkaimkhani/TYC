@@ -23,12 +23,13 @@ public class LoginScreen extends AppCompatActivity {
     EditText userid,password;
     String UserID,UserPass;
     Button btn_login;
-    Global global;
+    private static Global global;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ViewCompat.setTransitionName(findViewById(R.id.app_bar_layout), "Hello");
+
         signup = (TextView) findViewById(R.id.tv_signup);
         userid = (EditText) findViewById(R.id.et_userid);
         password = (EditText) findViewById(R.id.et_password);
@@ -43,6 +44,10 @@ public class LoginScreen extends AppCompatActivity {
         ActionBar mActionBar = getSupportActionBar();
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.hide();
+
+        global = (Global) getApplicationContext();
+        global.setActivity(LoginScreen.this);
+        global.setContext(LoginScreen.this);
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override

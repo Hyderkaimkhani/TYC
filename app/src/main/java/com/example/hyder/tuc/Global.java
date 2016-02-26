@@ -11,6 +11,7 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,7 +37,12 @@ public class Global extends Application implements AppConstants{
 
     private Context context = null;
     private Activity activity = null;
-    Login login;
+    String result = null;
+    String Error = null;
+    public static Session mySession;
+    public static String mySessionId;
+
+    Login login = new Login();
     ApiInvoker ApiInvoker = new ApiInvoker();
 
     public TextToSpeech textToSpeech;
@@ -174,7 +180,7 @@ public class Global extends Application implements AppConstants{
                     ApiInvoker.Post(SessionURL, APIKey, entity, ContentType, new ApiInvoker.OnJSONResponseCallback() {
                         @Override
                         public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException {
-/*
+
                             result = response.toString();
                             if (result != null) {
 
@@ -184,15 +190,15 @@ public class Global extends Application implements AppConstants{
                                     mySessionId = mySession.getSession_id().toString();
 
                                     if (mySession != null) {
-
+/*
                                         if (!googleApiClient.isConnected())
-                                            googleApiClient.connect();
+                                            googleApiClient.connect();*/
 
                                      //   sessionTask();
 
                                     } else {
                                         alertOk("Login Error", ApiInvoker.response + " Please retry.");
-                                        resetLogin();
+                                      //  resetLogin();
                                     }
 
                                 } catch (ApiException e) {
@@ -201,13 +207,21 @@ public class Global extends Application implements AppConstants{
 
                             } else {
                                 alertOk("Info", "Please try again.");
-                                resetLogin();
-                            }*/
+                               // resetLogin();
+                            }
                         }
 
                         @Override
                         public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
 
+
+                           Error = response.toString();
+                            try {
+                                Error = jsonError(Error);
+                                alertOk("Error",Error);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                 } catch (InterruptedException e) {
@@ -223,5 +237,14 @@ public class Global extends Application implements AppConstants{
             e.printStackTrace();
         }
         // return session;
+    }
+    public String jsonError(String res) throws JSONException {
+        JSONObject jsonObj = new JSONObject(res);
+        JSONObject jso = (JSONObject) jsonObj;
+        //JSONObject company = (JSONObject) jso.get("error");
+        JSONArray jsonArray = (JSONArray) jso.get("error");
+        JSONObject val = (JSONObject) jsonArray.get(0);
+        res = val.get("message").toString();
+        return res;
     }
 }

@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.example.hyder.tuc"
         minSdkVersion 17
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -16,6 +16,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    packagingOptions {
+        pickFirst 'META-INF/NOTICE'
+        pickFirst 'META-INF/LICENSE'
+        pickFirst 'META-INF/MANIFEST'
+        pickFirst 'META-INF/LICENSE.txt'
+        pickFirst 'META-INF/NOTICE.txt'
+        pickFirst 'META-INF/MANIFEST'
     }
 }
 
@@ -26,10 +34,11 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.mikhaellopez:circularimageview:3.0.1'  // for circular imageview
     compile files('libs/jackson-annotations-2.4.0.jar') //for JSON
-    compile files('libs/jackson-databind-2.4.6.1.jar')
+   // compile files('libs/jackson-databind-2.4.6.1.jar')
     compile files('libs/okhttp-2.3.0.jar')
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile files('libs/jackson-core-2.4.6.jar')
-
+    compile 'com.google.android.gms:play-services-maps:7.8.0'
+    compile 'com.google.android.gms:play-services-location:7.8.0'
 
 }
