@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by hv on 2/23/16.
  */
-public class UsersPojo {
+public class User {
 
     @JsonProperty("_id")
     private String Id;

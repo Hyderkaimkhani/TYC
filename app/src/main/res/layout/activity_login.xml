@@ -70,7 +70,7 @@
             android:layout_height="match_parent"
             android:layout_margin="20dp"
             android:orientation="vertical"
-            android:background="#E0F7FA"
+            android:background="#FAFAFA"
             android:paddingBottom="60dp"
             android:elevation="6dp"
             android:gravity="center_vertical">
@@ -84,7 +84,9 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textColor="#006064" />
 
             <EditText
                 android:layout_width="280dp"

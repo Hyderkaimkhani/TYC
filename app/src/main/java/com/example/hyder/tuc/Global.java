@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -16,6 +15,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import TYC.Session;
+import TYC.Task;
+import TYC.User;
 import TYCAPI.ApiException;
 import TYCAPI.ApiInvoker;
 import cz.msebera.android.httpclient.entity.StringEntity;
@@ -39,6 +40,8 @@ public class Global extends Application implements AppConstants{
     private Activity activity = null;
     String result = null;
     String Error = null;
+    private User user;
+    private Task task;
     public static Session mySession;
     public static String mySessionId;
 
@@ -194,7 +197,7 @@ public class Global extends Application implements AppConstants{
                                         if (!googleApiClient.isConnected())
                                             googleApiClient.connect();*/
 
-                                     //   sessionTask();
+                                        GetUserInfo();
 
                                     } else {
                                         alertOk("Login Error", ApiInvoker.response + " Please retry.");
@@ -213,7 +216,6 @@ public class Global extends Application implements AppConstants{
 
                         @Override
                         public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
-
 
                            Error = response.toString();
                             try {
@@ -238,6 +240,44 @@ public class Global extends Application implements AppConstants{
         }
         // return session;
     }
+
+    private void GetUserInfo() {
+
+        ApiInvoker.getResponse(GetTableURL + "Users" + "?filter=email=" + login.getEmail() + "",
+                AppConstants.TokenHeader + mySessionId + "\n" + AppConstants.APIKey, null, new ApiInvoker.OnJSONResponseCallback() {
+                    @Override
+                    public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException {
+
+                        result = response.toString();
+                        if (result.length()>15)
+                        {
+                            try {
+                                user = ((User) JSONParse.parseJSON(result, User.class).get(0));
+                            } catch (ApiException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else
+                        {
+                            alertOk("Error","Please Retry");
+                        }
+                    }
+
+                    @Override
+                    public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
+
+                        Error = response.toString();
+                        try {
+                            Error = jsonError(Error);
+                            alertOk("Error",Error);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+    }
+
     public String jsonError(String res) throws JSONException {
         JSONObject jsonObj = new JSONObject(res);
         JSONObject jso = (JSONObject) jsonObj;
