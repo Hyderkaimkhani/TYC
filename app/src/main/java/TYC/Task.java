@@ -1,7 +1,7 @@
 package TYC;
 
 /**
- * Created by hv on 2/27/16.
+ * Created by Hyder on 2/28/2016.
  */
 
 import java.util.HashMap;
@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 
 public class Task {
 
@@ -33,6 +32,8 @@ public class Task {
     private String Status;
     @JsonProperty("Date")
     private String Date;
+    @JsonProperty("EndDate")
+    private String EndDate;
     @JsonProperty("loc")
     private Loc loc;
     @JsonIgnore
@@ -164,6 +165,22 @@ public class Task {
     @JsonProperty("Date")
     public void setDate(String Date) {
         this.Date = Date;
+    }
+
+    /**
+     * @return The EndDate
+     */
+    @JsonProperty("EndDate")
+    public String getEndDate() {
+        return EndDate;
+    }
+
+    /**
+     * @param EndDate The EndDate
+     */
+    @JsonProperty("EndDate")
+    public void setEndDate(String EndDate) {
+        this.EndDate = EndDate;
     }
 
     /**

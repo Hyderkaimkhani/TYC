@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -23,6 +24,7 @@ public class LoginScreen extends AppCompatActivity {
     EditText userid,password;
     String UserID,UserPass;
     Button btn_login;
+    ProgressBar progressBar;
     private static Global global;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,9 @@ public class LoginScreen extends AppCompatActivity {
         userid = (EditText) findViewById(R.id.et_userid);
         password = (EditText) findViewById(R.id.et_password);
         btn_login = (Button) findViewById(R.id.login);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+        progressBar.setVisibility(View.INVISIBLE);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle("SignIn");
         collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
@@ -67,8 +71,9 @@ public class LoginScreen extends AppCompatActivity {
 
                 }*/
 
-
-                    global.Login(UserID,UserPass);
+                btn_login.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
+                global.Login(UserID,UserPass);
 
 
 

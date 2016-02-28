@@ -5,9 +5,13 @@ import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.speech.tts.TextToSpeech;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -125,7 +129,7 @@ public class Global extends Application implements AppConstants{
         }
         else
         {
-            alertOk("Error","Enter UserID or Password");
+            alertOk("Error", "Enter UserID or Password");
         }
 
 
@@ -201,7 +205,7 @@ public class Global extends Application implements AppConstants{
 
                                     } else {
                                         alertOk("Login Error", ApiInvoker.response + " Please retry.");
-                                      //  resetLogin();
+                                        resetLogin();
                                     }
 
                                 } catch (ApiException e) {
@@ -210,7 +214,7 @@ public class Global extends Application implements AppConstants{
 
                             } else {
                                 alertOk("Info", "Please try again.");
-                               // resetLogin();
+                                resetLogin();
                             }
                         }
 
@@ -221,6 +225,7 @@ public class Global extends Application implements AppConstants{
                             try {
                                 Error = jsonError(Error);
                                 alertOk("Error",Error);
+                                resetLogin();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -233,6 +238,7 @@ public class Global extends Application implements AppConstants{
             else
             {
                 alertOk("Error", "Network not available. Please retry later.");
+                resetLogin();
             }
 
         } catch (UnsupportedEncodingException e) {
@@ -253,6 +259,9 @@ public class Global extends Application implements AppConstants{
                         {
                             try {
                                 user = ((User) JSONParse.parseJSON(result, User.class).get(0));
+
+                                Intent intent = new Intent(getActivity(),MainActivity.class);
+                                startActivity(intent);
                             } catch (ApiException e) {
                                 e.printStackTrace();
                             }
@@ -260,6 +269,7 @@ public class Global extends Application implements AppConstants{
                         else
                         {
                             alertOk("Error","Please Retry");
+                            resetLogin();
                         }
                     }
 
@@ -270,6 +280,7 @@ public class Global extends Application implements AppConstants{
                         try {
                             Error = jsonError(Error);
                             alertOk("Error",Error);
+                            resetLogin();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -286,5 +297,26 @@ public class Global extends Application implements AppConstants{
         JSONObject val = (JSONObject) jsonArray.get(0);
         res = val.get("message").toString();
         return res;
+    }
+    public void resetLogin()
+    {
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                 //   getActivity().invalidateOptionsMenu();
+                    ProgressBar progressBar = (ProgressBar) activity.findViewById(R.id.progressBar);
+                    progressBar.setVisibility(View.INVISIBLE);
+
+                    Button btnLogin = (Button) activity.findViewById(R.id.Login);
+                    btnLogin.setVisibility(View.VISIBLE);
+
+                   /* Button register = (Button) activity.findViewById(R.id.registerbtn);
+                    register.setVisibility(View.VISIBLE);*/
+                }
+
+
+        });
     }
 }
