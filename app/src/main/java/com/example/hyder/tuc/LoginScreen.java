@@ -26,6 +26,7 @@ public class LoginScreen extends AppCompatActivity {
     Button btn_login;
     ProgressBar progressBar;
     private static Global global;
+    public boolean login = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,7 @@ public class LoginScreen extends AppCompatActivity {
         signup = (TextView) findViewById(R.id.tv_signup);
         userid = (EditText) findViewById(R.id.et_userid);
         password = (EditText) findViewById(R.id.et_password);
-        btn_login = (Button) findViewById(R.id.login);
+        btn_login = (Button) findViewById(R.id.Login);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         progressBar.setVisibility(View.INVISIBLE);
@@ -64,6 +65,7 @@ public class LoginScreen extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                login = true;
                UserID = userid.getText().toString();
                UserPass = password.getText().toString();
                /* if(str_user.equals("") || str_pass.equals(""))

@@ -13,7 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,7 +49,7 @@ public class Global extends Application implements AppConstants{
     private Task task;
     public static Session mySession;
     public static String mySessionId;
-
+    RegisterUser registerUser = new RegisterUser();
     Login login = new Login();
     ApiInvoker ApiInvoker = new ApiInvoker();
 
@@ -130,6 +131,7 @@ public class Global extends Application implements AppConstants{
         else
         {
             alertOk("Error", "Enter UserID or Password");
+            resetLogin();
         }
 
 
@@ -146,7 +148,7 @@ public class Global extends Application implements AppConstants{
             /*beep = MediaPlayer.create(this, R.raw.beep02);
             beep.setVolume(100, 100);
             beep.start();*/
-            textToSpeech.speak(title, TextToSpeech.QUEUE_FLUSH, null);
+      /*      textToSpeech.speak(title, TextToSpeech.QUEUE_FLUSH, null);*/
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -200,8 +202,12 @@ public class Global extends Application implements AppConstants{
 /*
                                         if (!googleApiClient.isConnected())
                                             googleApiClient.connect();*/
-
-                                        GetUserInfo();
+                                        if (login.equals(true)) {
+                                            GetUserInfo();
+                                        }
+                                       else{
+                                            Register();
+                                        }
 
                                     } else {
                                         alertOk("Login Error", ApiInvoker.response + " Please retry.");
@@ -249,7 +255,7 @@ public class Global extends Application implements AppConstants{
 
     private void GetUserInfo() {
 
-        ApiInvoker.getResponse(GetTableURL + "Users" + "?filter=email=" + login.getEmail() + "",
+        ApiInvoker.getResponse(GetTableURL + "Users" + "?filter=Email=" + login.getEmail() + "",
                 AppConstants.TokenHeader + mySessionId + "\n" + AppConstants.APIKey, null, new ApiInvoker.OnJSONResponseCallback() {
                     @Override
                     public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException {
@@ -261,6 +267,7 @@ public class Global extends Application implements AppConstants{
                                 user = ((User) JSONParse.parseJSON(result, User.class).get(0));
 
                                 Intent intent = new Intent(getActivity(),MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                             } catch (ApiException e) {
                                 e.printStackTrace();
@@ -297,6 +304,30 @@ public class Global extends Application implements AppConstants{
         JSONObject val = (JSONObject) jsonArray.get(0);
         res = val.get("message").toString();
         return res;
+    }
+    public void Register() {
+        Gson gson = new GsonBuilder().create();
+        String json = gson.toJson(registerUser);
+        try {
+            StringEntity userEntity = new StringEntity(json);
+
+        ApiInvoker.Post("https://df-track-your-circle.enterprise.dreamfactory.com/api/v2/user/register", AppConstants.TokenHeader + mySessionId +
+                "\n" + AppConstants.APIKey, userEntity, AppConstants.ContentType, new ApiInvoker.OnJSONResponseCallback() {
+            @Override
+            public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException {
+
+            }
+
+            @Override
+            public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
+
+            }
+        });
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     public void resetLogin()
     {
