@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.google.android.gms.common.api.Api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.json.JSONArray;
@@ -45,11 +47,12 @@ public class Global extends Application implements AppConstants{
     private Activity activity = null;
     String result = null;
     String Error = null;
-    private User user;
+    public User user;
     private Task task;
     public static Session mySession;
     public static String mySessionId;
     RegisterUser registerUser = new RegisterUser();
+//    User user = new User();
     Login login = new Login();
     ApiInvoker ApiInvoker = new ApiInvoker();
     public boolean loginuser = false;
@@ -110,23 +113,20 @@ public class Global extends Application implements AppConstants{
         return false;
     }
 
-    public void Login(String userID, String UserPass) {
+/*    public void Login(String userID, String UserPass) {
 
         if(!userID.isEmpty() || !UserPass.isEmpty() )
         {
             login.setEmail(userID);
             login.setPassword(UserPass);
 
-           /* JSONObject credential = new JSONObject();
+           *//* JSONObject credential = new JSONObject();
 
             credential.put("email", userID);
-            credential.put("password", UserPass);*/
+            credential.put("password", UserPass);*//*
 
-            try {
-                getSession();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+              // LoginUser();
+
 
         }
         else
@@ -136,12 +136,13 @@ public class Global extends Application implements AppConstants{
         }
 
 
-    }
+    }*/
 
 
     public final void alertOk(String title, String message) {
         alertOk(title, message, getContext());
     }
+
     private final void alertOk(final String title, final String message, final Context con) {
         if(!((Activity) context).isFinishing())
         {
@@ -166,13 +167,11 @@ public class Global extends Application implements AppConstants{
                                             dialog.cancel();
                                         }
                                     }).create().show();
-
-
                 }
             });
-
         }
     }
+
 
     public void getSession() throws JSONException {
 
@@ -200,18 +199,20 @@ public class Global extends Application implements AppConstants{
                                     mySessionId = mySession.getSession_id().toString();
 
                                     if (mySession != null) {
+                                        RegisterUser();
 /*
                                         if (!googleApiClient.isConnected())
                                             googleApiClient.connect();*/
-                                        if (loginuser== true) {
+                                       /* if (loginuser == true) {
                                             GetUserInfo();
+                                            LoginUser();
                                         }
                                        else{
-                                            Register();
-                                        }
+                                            RegisterUser();
+                                        }*/
 
                                     } else {
-                                        alertOk("Login Error", ApiInvoker.response + " Please retry.");
+                                        alertOk("SignUp Error", ApiInvoker.response + " Please retry.");
                                         resetLogin();
                                     }
 
@@ -253,6 +254,7 @@ public class Global extends Application implements AppConstants{
         }
         // return session;
     }
+
 
     private void GetUserInfo() {
 
@@ -297,6 +299,7 @@ public class Global extends Application implements AppConstants{
 
     }
 
+
     public String jsonError(String res) throws JSONException {
         JSONObject jsonObj = new JSONObject(res);
         JSONObject jso = (JSONObject) jsonObj;
@@ -306,7 +309,90 @@ public class Global extends Application implements AppConstants{
         res = val.get("message").toString();
         return res;
     }
-    public void Register() {
+
+
+    public void LoginUser(String userID, String UserPass)
+    {
+        if(!userID.isEmpty() || !UserPass.isEmpty() ) {
+            login.setEmail(userID);
+            login.setPassword(UserPass);
+
+            Gson gson = new GsonBuilder().create();
+            String json = gson.toJson(login);
+            StringEntity LoginEntity = null;
+            try {
+                LoginEntity = new StringEntity(json);
+                ApiInvoker.Post(SessionURL, APIKey, LoginEntity, ContentType, new ApiInvoker.OnJSONResponseCallback() {
+                    @Override
+                    public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException {
+
+                        result = response.toString();
+                        if (result.length() > 15) {
+
+                            try {
+                                mySession = (Session) ApiInvoker.deserialize(result, "",
+                                        Session.class);
+                                mySessionId = mySession.getSession_id().toString();
+
+                                if (mySession != null) {
+
+                                    try {
+                                        user = ((User) JSONParse.parseJSON(result, User.class).get(0));
+
+                                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    } catch (ApiException e) {
+                                        e.printStackTrace();
+                                    }
+                               /*         if (!googleApiClient.isConnected())
+                                            googleApiClient.connect();*/
+
+                                } else {
+                                    alertOk("Login Error", ApiInvoker.response + " Please retry.");
+                                    resetLogin();
+                                }
+
+                            } catch (ApiException e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            alertOk("Info", "Please try again.");
+                            resetLogin();
+                        }
+
+                    }
+
+                    @Override
+                    public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
+                        Error = response.toString();
+                        try {
+                            Error = jsonError(Error);
+                            alertOk("Error", Error);
+                            resetLogin();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else {
+            alertOk("Error", "Enter UserID or Password");
+            resetLogin();
+        }
+    }
+
+
+    public void RegisterUser() {
         Gson gson = new GsonBuilder().create();
         String json = gson.toJson(registerUser);
         try {
@@ -320,7 +406,8 @@ public class Global extends Application implements AppConstants{
                 result = response.toString();
                 if (result != null) {
                     alertOk("Alert","You are registered Sucessfully");
-                    User user = new User();
+                   PostUser();
+
                 }
 
             }
@@ -336,6 +423,37 @@ public class Global extends Application implements AppConstants{
             e.printStackTrace();
         }
     }
+
+
+    public void PostUser()
+    {
+        Gson gson = new GsonBuilder().create();
+        String json = gson.toJson(user);
+        StringEntity userEntity = null;
+        try {
+            userEntity = new StringEntity(json);
+
+
+            ApiInvoker.Post(GetTableURL+ "users", TokenHeader + mySessionId + "\n" + APIKey,
+                    userEntity, ContentType, new ApiInvoker.OnJSONResponseCallback() {
+                        @Override
+                        public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException {
+
+                        }
+
+                        @Override
+                        public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
+
+                        }
+                    });
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void resetLogin()
     {
 

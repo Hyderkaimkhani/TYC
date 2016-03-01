@@ -11,9 +11,9 @@ public class Login {
     @JsonProperty("password")
     private String password = null;
     /* Duration of the session, Defaults to 0, which means until browser is closed. */
-    @JsonProperty("duration")
+  /*  @JsonProperty("duration")
     private Integer duration = null;
-
+*/
     public String getEmail() {
         return email;
     }
@@ -30,19 +30,5 @@ public class Login {
         this.password = password;
     }
 
-    public void setNewPassword(String password) {
-        this.password = password;
-    }
 
-    public String getNewPassword() {
-        return password;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
 }

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 
+import TYC.User;
+
 public class SignUp extends AppCompatActivity {
 
     EditText Fname,Lname,Email,Company,Password,ConfirmPassword;
@@ -70,6 +72,11 @@ public class SignUp extends AppCompatActivity {
             global.registerUser.setLastName("ALI");
             global.registerUser.setNewPassword("123456");
 
+            global.user.setEmail(email);
+            global.user.setFName(FName);
+            global.user.setLName(LName);
+            global.user.setPassword(password);
+            global.user.setCompany(company);
 
             try {
                 global.getSession();

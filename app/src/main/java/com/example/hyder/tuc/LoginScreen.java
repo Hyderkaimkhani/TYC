@@ -75,7 +75,7 @@ public class LoginScreen extends AppCompatActivity {
 
                 btn_login.setVisibility(View.INVISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
-                global.Login(UserID,UserPass);
+                global.LoginUser(UserID,UserPass);
 
 
 
