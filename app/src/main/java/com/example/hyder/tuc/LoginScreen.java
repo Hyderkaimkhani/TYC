@@ -26,7 +26,7 @@ public class LoginScreen extends AppCompatActivity {
     Button btn_login;
     ProgressBar progressBar;
     private static Global global;
-    public boolean login = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +65,7 @@ public class LoginScreen extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login = true;
+               global.loginuser = true;
                UserID = userid.getText().toString();
                UserPass = password.getText().toString();
                /* if(str_user.equals("") || str_pass.equals(""))

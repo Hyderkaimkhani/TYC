@@ -70,6 +70,7 @@ public class SignUp extends AppCompatActivity {
             global.registerUser.setLastName("ALI");
             global.registerUser.setNewPassword("123456");
 
+
             try {
                 global.getSession();
             } catch (JSONException e) {

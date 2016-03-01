@@ -62,7 +62,6 @@
             android:layout_toEndOf="@+id/et_Fname"
             android:background="@drawable/edittext"
             android:gravity="center_vertical|center_horizontal"
-            android:textColor="#86e6e9"
             android:hint="Last Name" />
 
         <EditText

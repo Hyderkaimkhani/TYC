@@ -52,7 +52,8 @@ public class Global extends Application implements AppConstants{
     RegisterUser registerUser = new RegisterUser();
     Login login = new Login();
     ApiInvoker ApiInvoker = new ApiInvoker();
-
+    public boolean loginuser = false;
+    String FName,LName,email,company,password,confirmPassword;
     public TextToSpeech textToSpeech;
 
     public Context getContext() {
@@ -202,7 +203,7 @@ public class Global extends Application implements AppConstants{
 /*
                                         if (!googleApiClient.isConnected())
                                             googleApiClient.connect();*/
-                                        if (login.equals(true)) {
+                                        if (loginuser== true) {
                                             GetUserInfo();
                                         }
                                        else{
@@ -316,11 +317,17 @@ public class Global extends Application implements AppConstants{
             @Override
             public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException {
 
+                result = response.toString();
+                if (result != null) {
+                    alertOk("Alert","You are registered Sucessfully");
+                    User user = new User();
+                }
+
             }
 
             @Override
             public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
-
+                result = response.toString();
             }
         });
         } catch (UnsupportedEncodingException e) {

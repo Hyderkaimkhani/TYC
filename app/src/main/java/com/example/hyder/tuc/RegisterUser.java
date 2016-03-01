@@ -23,7 +23,7 @@ public class RegisterUser {
     @JsonProperty("last_name")
     private String lastName;
     @JsonProperty("password")
-    private String newPassword;
+    private String password;
 
     /**
      *
@@ -92,7 +92,7 @@ public class RegisterUser {
      */
     @JsonProperty("password")
     public String getNewPassword() {
-        return newPassword;
+        return password;
     }
 
     /**
@@ -102,7 +102,7 @@ public class RegisterUser {
      */
     @JsonProperty("password")
     public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
+        this.password = newPassword;
     }
 
 
