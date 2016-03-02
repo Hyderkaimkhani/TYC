@@ -67,7 +67,7 @@ public class SignUp extends AppCompatActivity {
             global.alertOk("Error","Password should be same");
         }
         else {
-            global.registerUser.setEmail("ali@tyc.com");
+            global.registerUser.setEmail("113@tyc.com");
             global.registerUser.setFirstName("KHAN");
             global.registerUser.setLastName("ALI");
             global.registerUser.setNewPassword("123456");

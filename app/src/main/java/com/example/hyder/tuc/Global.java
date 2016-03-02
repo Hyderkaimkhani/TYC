@@ -47,7 +47,7 @@ public class Global extends Application implements AppConstants{
     private Activity activity = null;
     String result = null;
     String Error = null;
-    public User user;
+    public User user = new User();
     private Task task;
     public static Session mySession;
     public static String mySessionId;
@@ -256,9 +256,9 @@ public class Global extends Application implements AppConstants{
     }
 
 
-    private void GetUserInfo() {
+    public void GetUserInfo() {
 
-        ApiInvoker.getResponse(GetTableURL + "Users" + "?filter=Email=" + login.getEmail() + "",
+        ApiInvoker.getResponse(GetTableURL + "Users" + "?filter=MgrID=" + login.getEmail() + "",
                 AppConstants.TokenHeader + mySessionId + "\n" + AppConstants.APIKey, null, new ApiInvoker.OnJSONResponseCallback() {
                     @Override
                     public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException {
@@ -269,9 +269,9 @@ public class Global extends Application implements AppConstants{
                             try {
                                 user = ((User) JSONParse.parseJSON(result, User.class).get(0));
 
-                                Intent intent = new Intent(getActivity(),MainActivity.class);
+                             /*   Intent intent = new Intent(getActivity(),MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
+                                startActivity(intent);*/
                             } catch (ApiException e) {
                                 e.printStackTrace();
                             }
@@ -301,12 +301,18 @@ public class Global extends Application implements AppConstants{
 
 
     public String jsonError(String res) throws JSONException {
+
+
+
         JSONObject jsonObj = new JSONObject(res);
-        JSONObject jso = (JSONObject) jsonObj;
+        JSONObject error  = jsonObj.getJSONObject("error");
+        res = error.getString("message");
+
+    /*    JSONObject jso = (JSONObject) jsonObj;
         //JSONObject company = (JSONObject) jso.get("error");
         JSONArray jsonArray = (JSONArray) jso.get("error");
         JSONObject val = (JSONObject) jsonArray.get(0);
-        res = val.get("message").toString();
+        res = val.get("message").toString();*/
         return res;
     }
 
@@ -336,15 +342,13 @@ public class Global extends Application implements AppConstants{
 
                                 if (mySession != null) {
 
-                                    try {
-                                        user = ((User) JSONParse.parseJSON(result, User.class).get(0));
+
+                                      //  user = ()
 
                                         Intent intent = new Intent(getActivity(), MainActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
-                                    } catch (ApiException e) {
-                                        e.printStackTrace();
-                                    }
+
                                /*         if (!googleApiClient.isConnected())
                                             googleApiClient.connect();*/
 
@@ -406,7 +410,8 @@ public class Global extends Application implements AppConstants{
                 result = response.toString();
                 if (result != null) {
                     alertOk("Alert","You are registered Sucessfully");
-                   PostUser();
+                    PostUser();
+                  //  resetLogin();
 
                 }
 
@@ -415,6 +420,7 @@ public class Global extends Application implements AppConstants{
             @Override
             public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
                 result = response.toString();
+                alertOk("Error","");
             }
         });
         } catch (UnsupportedEncodingException e) {
