@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
-    Global global;
+    public Global global;
     // Tab titles
     private String[] tabs = { "Add Member", "View Members", "Add Task" };
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         global = (Global) getApplicationContext();
         global.setActivity(this);
         global.setContext(this);
-        global.GetUserInfo();
+     //   global.GetUserInfo();
        // glGetAllEmployees()
 
 /*

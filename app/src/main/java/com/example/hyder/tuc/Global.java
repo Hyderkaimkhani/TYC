@@ -47,6 +47,7 @@ public class Global extends Application implements AppConstants{
     private Activity activity = null;
     String result = null;
     String Error = null;
+    public LocalDatabase local;
     public User user = new User();
     private Task task;
     public static Session mySession;
@@ -58,6 +59,7 @@ public class Global extends Application implements AppConstants{
     public boolean loginuser = false;
     String FName,LName,email,company,password,confirmPassword;
     public TextToSpeech textToSpeech;
+
 
     public Context getContext() {
         return context != null ? context : null;
@@ -258,29 +260,47 @@ public class Global extends Application implements AppConstants{
 
     public void GetUserInfo() {
 
+        local = new LocalDatabase(this);
+        local.openDatabase();
+     //   local.openDatabase();
+
         ApiInvoker.getResponse(GetTableURL + "Users" + "?filter=MgrID=" + login.getEmail() + "",
                 AppConstants.TokenHeader + mySessionId + "\n" + AppConstants.APIKey, null, new ApiInvoker.OnJSONResponseCallback() {
                     @Override
                     public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException {
 
+                        String id,email,Fname,Lname,Company,MgrID,Rating,lat,lng;
+
                         result = response.toString();
                         if (result.length()>15)
                         {
-                            try {
-                                user = ((User) JSONParse.parseJSON(result, User.class).get(0));
 
-                             /*   Intent intent = new Intent(getActivity(),MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);*/
-                            } catch (ApiException e) {
-                                e.printStackTrace();
-                            }
+                           //    user = ((User) JSONParse.parseJSON(result, User.class).get(0));
+
+
+                                JSONArray employees = response.getJSONArray("resource");
+                                for (int i=0; i<employees.length(); i++) {
+                                    JSONObject person = employees.getJSONObject(i);
+                                    id = person.getString("_id");
+                                    email = person.getString("Email");
+                                    Fname = person.getString("FName");
+                                    Lname = person.getString("LName");
+                                    Company = person.getString("Company");
+                                    MgrID = person.getString("MgrID");
+                                    Rating = person.getString("Rating");
+                                    JSONArray location = person.getJSONObject("loc").getJSONArray("coordinates");;
+                                    lat = location.get(0).toString();
+                                    lng = location.get(1).toString();
+
+
+                                    local.InsertEmployee(id,email,Fname,Lname,Company,MgrID,Rating,lat,lng);
+                                }
                         }
-                        else
-                        {
-                            alertOk("Error","Please Retry");
-                            resetLogin();
-                        }
+                        // if no data found just go to main activity
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+
                     }
 
                     @Override
@@ -342,12 +362,10 @@ public class Global extends Application implements AppConstants{
 
                                 if (mySession != null) {
 
-
+                                    GetUserInfo();    // get all users that has MGRID == loginID
                                       //  user = ()
 
-                                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);
+
 
                                /*         if (!googleApiClient.isConnected())
                                             googleApiClient.connect();*/

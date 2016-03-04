@@ -23,7 +23,7 @@ public class User {
     @JsonProperty("Email")
     private String Email;
     @JsonProperty("MgrID")
-    private List<Object> MgrID = new ArrayList<Object>();
+    private String MgrID;
     @JsonProperty("Rating")
     private String Rating;
     @JsonProperty("Password")
@@ -132,7 +132,7 @@ public class User {
      * @return The MgrID
      */
     @JsonProperty("MgrID")
-    public List<Object> getMgrID() {
+    public String getMgrID() {
         return MgrID;
     }
 
@@ -140,7 +140,7 @@ public class User {
      * @param MgrID The MgrID
      */
     @JsonProperty("MgrID")
-    public void setMgrID(List<Object> MgrID) {
+    public void setMgrID(String MgrID) {
         this.MgrID = MgrID;
     }
 

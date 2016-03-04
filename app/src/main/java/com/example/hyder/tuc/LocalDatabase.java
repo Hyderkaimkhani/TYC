@@ -155,6 +155,15 @@ public class LocalDatabase {
         return sqLiteDatabase.insert(TASKS_TABLE, null, initialValues);
     }
 
+    public Cursor getEmployees(String mgrid)
+    {
+        Cursor mCursor = sqLiteDatabase.rawQuery("SELECT Fname , Lname, Email FROM persons WHERE MgrID='%"+mgrid+"%' ",null);
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+
 /*    public Cursor getJobDetail(String date, String callsign)
     {
         Cursor mCursor = sqLiteDatabase.rawQuery("SELECT date,time,destination,source,fare FROM account WHERE date='"+date+"' AND "+Call_Sign+"='"+callsign+"' ",null);
