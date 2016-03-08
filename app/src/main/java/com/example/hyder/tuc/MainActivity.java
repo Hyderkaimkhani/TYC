@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
         global = (Global) getApplicationContext();
         global.setActivity(this);
         global.setContext(this);
-     //   global.GetUserInfo();
-       // glGetAllEmployees()
+       // global.GetUserInfo();
+        //GetAllEmployees()
 
 /*
 

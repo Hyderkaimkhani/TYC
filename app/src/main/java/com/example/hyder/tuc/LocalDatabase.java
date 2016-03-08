@@ -157,7 +157,7 @@ public class LocalDatabase {
 
     public Cursor getEmployees(String mgrid)
     {
-        Cursor mCursor = sqLiteDatabase.rawQuery("SELECT Fname , Lname, Email FROM persons WHERE MgrID='%"+mgrid+"%' ",null);
+        Cursor mCursor = sqLiteDatabase.rawQuery("SELECT Fname , Lname, Email FROM persons WHERE MgrID='"+mgrid+"' ",null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }

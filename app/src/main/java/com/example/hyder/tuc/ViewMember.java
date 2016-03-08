@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ public class  ViewMember extends Fragment {
     Global global;
     ArrayList<String> Name = new ArrayList<>();
     ArrayList<String> Email = new ArrayList<>();
+    ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +43,7 @@ public class  ViewMember extends Fragment {
         global = (Global) getActivity().getApplication();
         global.setActivity(getActivity());
         global.setContext(getActivity());
+        listView = (ListView) rootView.findViewById(R.id.listView);
 
         email = global.login.getEmail();
 
@@ -66,6 +69,16 @@ public class  ViewMember extends Fragment {
             Toast.makeText(getActivity().getApplicationContext(),"No Employee",Toast.LENGTH_LONG).show();
         }
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String email = Email.get(position).toString();
+                Bundle bundle = new Bundle();
+
+                bundle.putString("email",email);
+            }
+        });
+
         return rootView;
     }
     public void DisplayList()
@@ -73,7 +86,7 @@ public class  ViewMember extends Fragment {
 
         ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(),R.layout.listview,Name);
 
-        ListView listView = (ListView) getActivity().findViewById(R.id.listView);
+        //ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
     }
 }

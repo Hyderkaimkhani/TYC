@@ -10,7 +10,7 @@
         android:layout_height="50sp"
         android:id="@+id/editText"
         android:drawableRight="@drawable/search"
-        android:background="@android:drawable/edit_text"
+        android:background="@drawable/edittext"
         android:layout_above="@+id/button"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" />
@@ -31,9 +31,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Add Member"
         android:id="@+id/textView2"
+        android:layout_marginTop="76dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="51dp" />
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
