@@ -3,9 +3,12 @@ package com.example.hyder.tuc;
 /**
  * Created by Hyder on 2/20/2016.
  */
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +79,13 @@ public class  ViewMember extends Fragment {
                 Bundle bundle = new Bundle();
 
                 bundle.putString("email",email);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Profile profile = new Profile();
+                profile.setArguments(bundle);
+                fragmentTransaction.replace(R.id.view_member,profile);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 
