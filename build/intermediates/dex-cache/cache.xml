@@ -1,2 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/home/hv/TYC/TYC/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.1.1_156548a9668f4c3abb1877fa0969bbc167863146.jar" />
+    </item>
+    <item
+        jar="/home/hv/TYC/TYC/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_901f91b1ac7665fb978bc97cf0a87e113c98a97c.jar" />
+    </item>
+    <item
+        jar="/home/hv/.gradle/caches/modules-2/files-2.1/cz.msebera.android/httpclient/4.3.6/526a9f794eab830eae4f23a62c572878b3f491ab/httpclient-4.3.6.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="526a9f794eab830eae4f23a62c572878b3f491ab">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/httpclient-4.3.6_4b1735766c3cd09071ad4587e705fd294028a79f.jar" />
+    </item>
+    <item
+        jar="/home/hv/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1_41d220bb7cfe3d164194a5e38f4940b1ceefbb24.jar" />
+    </item>
+    <item
+        jar="/home/hv/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/gson-2.3.1_23e4f5ba076255503f3395a3f0a0f77d8448e42e.jar" />
+    </item>
+    <item
+        jar="/home/hv/TYC/TYC/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/com.android.support-design-23.1.1_044a163dcc5cd176ca2b18dcba0c22dcf9c37885.jar" />
+    </item>
+    <item
+        jar="/home/hv/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.9/386a4339ffe52d5d63e80f9bed8d2b1d1a418249/android-async-http-1.4.9.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="386a4339ffe52d5d63e80f9bed8d2b1d1a418249">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.9_98b53008d7e6cdf52c67a9540986899ad229a5d6.jar" />
+    </item>
+    <item
+        jar="/home/hv/TYC/TYC/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.1.1_48da542a7aeb7ea9eb6113c5272768be9c0ae33f.jar" />
+    </item>
+    <item
+        jar="/home/hv/TYC/TYC/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="04de44f90606c77f3b28cf44861f306290505aac">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-maps-8.4.0_af7be452e699e4a0fcab2b85b292149ad7e25f69.jar" />
+    </item>
+    <item
+        jar="/home/hv/TYC/TYC/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.8.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4a135d56554069e5d0ff80e3220e887e57146ee5">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-location-7.8.0_860c949fe024136a4b485891b55bfd4f26534cb4.jar" />
+    </item>
+    <item
+        jar="/home/hv/TYC/TYC/app/libs/jackson-annotations-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d6a66c7a5f01cf500377bd669507a08cfeba882a">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/jackson-annotations-2.4.0_d34960d9699becd62d145921b90f4e25aaefebfc.jar" />
+    </item>
+    <item
+        jar="/home/hv/TYC/TYC/app/libs/jackson-core-2.4.6.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="2a1f6edb86b8c6d29f37f6a807295d4e5c279707">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/jackson-core-2.4.6_4d80a0651949dbbacb4b7e12c894a92151ef0f4c.jar" />
+    </item>
+    <item
+        jar="/home/hv/TYC/TYC/app/build/intermediates/exploded-aar/com.mikhaellopez/circularimageview/3.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c38aaa6e8232077c6b21a4ac56d49ff2dbcf29ac">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/com.mikhaellopez-circularimageview-3.0.1_6f43e7221782ba1fe66f538681bc20b582f8bb1e.jar" />
+    </item>
+    <item
+        jar="/home/hv/TYC/TYC/app/libs/jackson-databind-2.4.6.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="19b5396ea19d8850b7c52d2731e6bae38116fa35">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/jackson-databind-2.4.6.1_4f53a34bb7adc300cdded6432164bd8ab1462687.jar" />
+    </item>
+    <item
+        jar="/home/hv/TYC/TYC/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.1.1_cb5f71337a37731c4a1d2be27d56cf748f6a3d0b.jar" />
+    </item>
+    <item
+        jar="/home/hv/TYC/TYC/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-8.4.0_dee0428038b6f7aaac09188f6fde604c521bc42a.jar" />
+    </item>
+    <item
+        jar="/home/hv/TYC/TYC/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="/home/hv/TYC/TYC/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-8.4.0_b8a9d8eaf9d3007b770871b85dff470b5e1d6953.jar" />
+    </item>
+
+</items>

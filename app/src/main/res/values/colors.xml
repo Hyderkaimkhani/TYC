@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00B8D4</color>
+    <color name="colorPrimary">#00b8d4</color>
     <color name="colorPrimaryDark">#00838F</color>
     <color name="colorAccent">#00E5FF</color>
-    <color name="cayan50">#E0F7FA</color>
-    <color name="cayan200">#80DEEA</color>
+    <color name="cayan50">#e0f7fa</color>
+    <color name="cayan200">#80deea</color>
+    <color name="white">#FFF</color>
 </resources>

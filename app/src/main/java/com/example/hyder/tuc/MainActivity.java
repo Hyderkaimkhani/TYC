@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
     public Global global;
+    public static String selectedmember;
     // Tab titles
     private String[] tabs = { "Add Member", "View Members", "Add Task" };
 
@@ -92,7 +93,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-
+    @Override
+    public void onBackPressed() {
+        /*if (getFragmentManager().getBackStackEntryCount() == 0) {
+          //  this.finish();
+        } else {
+            getFragmentManager().popBackStack();
+        }*/
+    }
 }

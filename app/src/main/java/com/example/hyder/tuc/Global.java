@@ -59,7 +59,7 @@ public class Global extends Application implements AppConstants{
     public boolean loginuser = false;
     String FName,LName,email,company,password,confirmPassword;
     public TextToSpeech textToSpeech;
-
+    public static String selectedmember;
 
     public Context getContext() {
         return context != null ? context : null;

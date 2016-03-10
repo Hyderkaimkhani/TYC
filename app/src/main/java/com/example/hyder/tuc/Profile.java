@@ -1,25 +1,25 @@
 package com.example.hyder.tuc;
 
-import android.app.Fragment;
+import android.app.FragmentManager;
+import android.database.Cursor;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class Profile extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-  //  private static final String ARG_PARAM1 = "param1";
-  //  private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    TextView name,email,company,rating;
+    String Name,Email,Company,Rating;
 
-    private OnFragmentInteractionListener mListener;
+    //private OnFragmentInteractionListener mListener;
 
     public Profile() {
         // Required empty public constructor
@@ -29,33 +29,53 @@ public class Profile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-    }
+        name = (TextView) view.findViewById(R.id.name);
+        email= (TextView) view.findViewById(R.id.email);
+        company = (TextView) view.findViewById(R.id.company);
+        rating = (TextView) view.findViewById(R.id.rating);
+        Email = getArguments().getString("email");
+        final LocalDatabase localdb = new LocalDatabase(getActivity());
+        localdb.openDatabase();
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        Cursor c =localdb.getProfile(Email);
+
+        if (c.moveToFirst())
+        {//c.moveToNext();
+            do {
+                name.setText (c.getString(0)+" "+c.getString(1));
+                email.setText(c.getString(2));
+                company.setText(c.getString(3));
+                rating.setText(c.getString(4));
+
+            }while (c.moveToNext());
+
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        else{
+           // Toast.makeText(getActivity().getApplicationContext(),"No Employee",Toast.LENGTH_LONG).show();
         }
+
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //  Log.i(tag, "keyCode: " + keyCode);
+                if( keyCode == KeyEvent.KEYCODE_BACK ) {
+                    //  Log.i(tag, "onKey Back listener is working!!!");
+                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+        return view;
+
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+
 
     /**
      * This interface must be implemented by activities that contain this

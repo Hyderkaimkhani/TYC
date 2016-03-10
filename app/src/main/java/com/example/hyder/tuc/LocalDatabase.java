@@ -164,6 +164,16 @@ public class LocalDatabase {
         return mCursor;
     }
 
+    public Cursor getProfile(String email)
+    {
+        Cursor mCursor = sqLiteDatabase.rawQuery("SELECT Fname , Lname, Email,Company,Rating FROM persons WHERE Email='"+email+"' ",null);
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+
+
 /*    public Cursor getJobDetail(String date, String callsign)
     {
         Cursor mCursor = sqLiteDatabase.rawQuery("SELECT date,time,destination,source,fare FROM account WHERE date='"+date+"' AND "+Call_Sign+"='"+callsign+"' ",null);
