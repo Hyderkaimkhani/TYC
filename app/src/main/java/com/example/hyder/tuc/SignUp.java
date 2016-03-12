@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -19,6 +20,7 @@ public class SignUp extends AppCompatActivity {
     String FName,LName,email,company,password,confirmPassword;
     Button btn_submit;
     Global global;
+    ProgressBar progressBar;
   //  RegisterUser user = new RegisterUser();
 
     @Override
@@ -43,7 +45,8 @@ public class SignUp extends AppCompatActivity {
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
 
-
+        progressBar = (ProgressBar) findViewById(R.id.signup_progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
         Fname = (EditText) findViewById(R.id.et_Fname);
         Lname = (EditText) findViewById(R.id.et_Lname);
         Email = (EditText) findViewById(R.id.et_email);
@@ -67,35 +70,51 @@ public class SignUp extends AppCompatActivity {
                 company= "test";
                 password="123456";
                 confirmPassword ="123456";
+                progressBar.setVisibility(View.VISIBLE);
+                btn_submit.setVisibility(View.INVISIBLE);
 
-        if(!password.equals(confirmPassword))
-        {
-            global.alertOk("Error","Password should be same");
-        }
-        else {
-            global.registerUser.setEmail(email);
-            global.registerUser.setFirstName(FName);
-            global.registerUser.setLastName(LName);
-            global.registerUser.setNewPassword(password);
+                if(FName==""||LName==""||email==""||company==""||password==""||confirmPassword=="" )
+                {
+                    global.alertOk("Error","Some fields are empty.");
+                    global.resetSignUp();
+                }
+                else if(!password.equals(confirmPassword))
+                {
+                        global.alertOk("Password Error","Password should be same");
+                        global.resetSignUp();
+                    }
+                else if(password.length()<6)
+                {
+                    global.alertOk("Password Error","Use at least 6 characters");
+                    global.resetSignUp();
+                }
+                else {
+                        global.registerUser.setEmail(email);
+                        global.registerUser.setFirstName(FName);
+                        global.registerUser.setLastName(LName);
+                        global.registerUser.setNewPassword(password);
 
-            global.user.setEmail(email);
-            global.user.setFName(FName);
-            global.user.setLName(LName);
-            global.user.setPassword(password);
-            global.user.setCompany(company);
-            global.user.setUserID("");
-            global.user.setUserID("");
-            global.user.setMgrID("");
-            global.user.setRating("");
+                        global.user.setEmail(email);
+                        global.user.setFName(FName);
+                        global.user.setLName(LName);
+                        global.user.setPassword(password);
+                        global.user.setCompany(company);
+                        global.user.setUserID("");
+                        global.user.setUserID("");
+                        global.user.setMgrID("");
+                        global.user.setRating("");
 
-            try {
-                global.getSession();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                        try {
+                            global.getSession();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-        }
-    }
+                    }
+
+                }
+
+
 });
 
     }

@@ -111,7 +111,8 @@
         android:hint="User ID"
         android:layout_marginTop="24dp"
         android:layout_below="@+id/textView"
-        android:layout_alignStart="@+id/et_password" />
+        android:layout_alignStart="@+id/et_password"
+        android:maxLines="1" />
 
     <EditText
         android:layout_width="280dp"
@@ -126,7 +127,8 @@
         android:layout_gravity="center_horizontal"
         android:hint="Password"
         android:layout_below="@+id/et_userid"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:maxLines="1" />
 
     <Button
         android:layout_width="wrap_content"

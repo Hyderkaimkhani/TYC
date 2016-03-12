@@ -30,7 +30,7 @@
         </activity>
 
         <activity android:name=".SignUp"
-            android:windowSoftInputMode="adjustPan|adjustResize"/>
+            android:windowSoftInputMode="adjustPan"/>
 
         <activity android:name=".LoginScreen">
             <intent-filter>

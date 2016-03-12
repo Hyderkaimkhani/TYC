@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -81,7 +82,8 @@
             android:drawablePadding="10dp"
             android:hint="Email"
             android:gravity="center_vertical"
-            android:paddingLeft="5dp" />
+            android:paddingLeft="5dp"
+            android:maxLines="1" />
 
 
 
@@ -100,7 +102,9 @@
             android:drawablePadding="10dp"
             android:hint="Company Name"
             android:gravity="center_vertical"
-            android:paddingLeft="5dp"/>
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:maxLines="1" />
 
 
         <Space
@@ -126,7 +130,8 @@
             android:drawableLeft="@drawable/lock"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
-            android:paddingLeft="5dp"/>
+            android:paddingLeft="5dp"
+            android:maxLines="1" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -145,8 +150,10 @@
             android:drawableLeft="@drawable/lock"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
-            android:paddingLeft="5dp"/>
+            android:paddingLeft="5dp"
+            android:maxLines="1" />
     </RelativeLayout>
+
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:layout_width="120sp"
@@ -174,4 +181,13 @@
         android:textColor="#FFF"
         android:textStyle="bold"
         android:elevation="6dp" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signup_progressBar"
+        android:layout_alignTop="@+id/btn_signup"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="false" />
 </RelativeLayout>
+

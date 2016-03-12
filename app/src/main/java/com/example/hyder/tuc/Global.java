@@ -224,7 +224,7 @@ public class Global extends Application implements AppConstants{
 
                                     } else {
                                         alertOk("SignUp Error", ApiInvoker.response + " Please retry.");
-                                        resetLogin();
+                                        resetSignUp();
                                     }
 
                                 } catch (ApiException e) {
@@ -233,7 +233,7 @@ public class Global extends Application implements AppConstants{
 
                             } else {
                                 alertOk("Info", "Please try again.");
-                                resetLogin();
+                                resetSignUp();
                             }
                         }
 
@@ -244,7 +244,7 @@ public class Global extends Application implements AppConstants{
                             try {
                                 Error = jsonError(Error);
                                 alertOk("Error",Error);
-                                resetLogin();
+                                resetSignUp();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -257,7 +257,7 @@ public class Global extends Application implements AppConstants{
             else
             {
                 alertOk("Error", "Network not available. Please retry later.");
-                resetLogin();
+                resetSignUp();
             }
 
         } catch (UnsupportedEncodingException e) {
@@ -535,6 +535,7 @@ public class Global extends Application implements AppConstants{
                     e.printStackTrace();
                 }
                 alertOk("Error", Error);
+                resetSignUp();
             }
         });
         } catch (UnsupportedEncodingException e) {
@@ -573,6 +574,7 @@ public class Global extends Application implements AppConstants{
                         public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
                             result = response.toString();
                             alertOk("Error","Please retry");
+                            resetSignUp();
                         }
                     });
         } catch (InterruptedException e) {
@@ -601,6 +603,29 @@ public class Global extends Application implements AppConstants{
                    /* Button register = (Button) activity.findViewById(R.id.registerbtn);
                     register.setVisibility(View.VISIBLE);*/
                 }
+
+
+        });
+    }
+
+    public void resetSignUp()
+    {
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                //   getActivity().invalidateOptionsMenu();
+
+                ProgressBar progressBar = (ProgressBar) activity.findViewById(R.id.signup_progressBar);
+                progressBar.setVisibility(View.INVISIBLE);
+
+                Button btnsignup = (Button) activity.findViewById(R.id.btn_signup);
+                btnsignup.setVisibility(View.VISIBLE);
+
+                   /* Button register = (Button) activity.findViewById(R.id.registerbtn);
+                    register.setVisibility(View.VISIBLE);*/
+            }
 
 
         });
