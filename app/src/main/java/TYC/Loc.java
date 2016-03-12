@@ -14,7 +14,7 @@ import java.util.Map;
 public class Loc {
 
     @JsonProperty("coordinates")
-    private List<Object> coordinates = new ArrayList<Object>();
+    private List<Double> coordinates = new ArrayList<Double>();
     @JsonProperty("type")
     private String type;
     @JsonIgnore
@@ -24,7 +24,7 @@ public class Loc {
      * @return The coordinates
      */
     @JsonProperty("coordinates")
-    public List<Object> getCoordinates() {
+    public List<Double> getCoordinates() {
         return coordinates;
     }
 
@@ -32,7 +32,7 @@ public class Loc {
      * @param coordinates The coordinates
      */
     @JsonProperty("coordinates")
-    public void setCoordinates(List<Object> coordinates) {
+    public void setCoordinates(List<Double> coordinates) {
         this.coordinates = coordinates;
     }
 

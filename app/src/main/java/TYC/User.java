@@ -10,8 +10,6 @@ import java.util.List;
  */
 public class User {
 
-    @JsonProperty("_id")
-    private String Id;
     @JsonProperty("UserID")
     private String UserID;
     @JsonProperty("FName")
@@ -31,22 +29,6 @@ public class User {
     @JsonProperty("loc")
     private Loc loc;
 
-
-    /**
-     * @return The Id
-     */
-    @JsonProperty("_id")
-    public String getId() {
-        return Id;
-    }
-
-    /**
-     * @param Id The _id
-     */
-    @JsonProperty("_id")
-    public void setId(String Id) {
-        this.Id = Id;
-    }
 
     /**
      * @return The UserID

@@ -55,28 +55,38 @@ public class SignUp extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
         public void onClick(View v) {
-        FName = Fname.getText().toString();
+       /* FName = Fname.getText().toString();
         LName=Lname.getText().toString();
         email=Email.getText().toString();
         company= Company.getText().toString();
         password=Password.getText().toString();
-        confirmPassword = ConfirmPassword.getText().toString();
+        confirmPassword = ConfirmPassword.getText().toString();*/
+                FName = "amjad";
+                LName="ali";
+                email="115@tyc.com";
+                company= "test";
+                password="123456";
+                confirmPassword ="123456";
 
         if(!password.equals(confirmPassword))
         {
             global.alertOk("Error","Password should be same");
         }
         else {
-            global.registerUser.setEmail("113@tyc.com");
-            global.registerUser.setFirstName("KHAN");
-            global.registerUser.setLastName("ALI");
-            global.registerUser.setNewPassword("123456");
+            global.registerUser.setEmail(email);
+            global.registerUser.setFirstName(FName);
+            global.registerUser.setLastName(LName);
+            global.registerUser.setNewPassword(password);
 
             global.user.setEmail(email);
             global.user.setFName(FName);
             global.user.setLName(LName);
             global.user.setPassword(password);
             global.user.setCompany(company);
+            global.user.setUserID("");
+            global.user.setUserID("");
+            global.user.setMgrID("");
+            global.user.setRating("");
 
             try {
                 global.getSession();

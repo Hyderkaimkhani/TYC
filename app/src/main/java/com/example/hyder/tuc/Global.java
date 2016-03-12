@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import TYC.Loc;
 import TYC.Session;
 import TYC.Task;
 import TYC.User;
@@ -32,6 +33,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import TYC.AppConstants;
 import TYC.Login;
@@ -49,6 +51,7 @@ public class Global extends Application implements AppConstants{
     String Error = null;
     public LocalDatabase local;
     public User user = new User();
+    public Loc loc = new Loc();
     private Task task;
     public static Session mySession;
     public static String mySessionId;
@@ -115,6 +118,12 @@ public class Global extends Application implements AppConstants{
         return false;
     }
 
+    public ArrayList<Double> getLoc(final double longitude, final double latitude) {
+        return new ArrayList<Double>() {{
+            add(longitude);
+            add(latitude);
+        }};
+    }
 /*    public void Login(String userID, String UserPass) {
 
         if(!userID.isEmpty() || !UserPass.isEmpty() )
@@ -257,6 +266,42 @@ public class Global extends Application implements AppConstants{
         // return session;
     }
 
+/*
+    public void patchMgrID(String email)
+    {
+        JSONObject mgrid = new JSONObject();
+        try {
+            mgrid.put("MgrID",login.getEmail());
+            String json = "{\"resource\":["+mgrid.toString()+"]}";
+
+            StringEntity entity = new StringEntity(json);
+
+        //    String json2 = "{\"resource\":["+mgrid+"]}";
+
+        ApiInvoker.patch(GetTableURL + "users" +"?filter=Email=" + email,
+                AppConstants.TokenHeader + mySessionId + "\n" + AppConstants.APIKey, entity, AppConstants.ContentType,
+                new ApiInvoker.OnJSONResponseCallback() {
+                    @Override
+                    public void onJSONSuccessResponse(boolean success, JSONObject response) {
+
+                        result = response.toString();
+                        Toast.makeText(getActivity(),"Succeded",Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
+                        result = response.toString();
+                        Toast.makeText(getActivity(),"Failure",Toast.LENGTH_SHORT).show();
+                    }
+                });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+    }*/
 
     public void GetUserInfo() {
 
@@ -319,6 +364,47 @@ public class Global extends Application implements AppConstants{
 
     }
 
+    public void GetUser() {
+
+        local = new LocalDatabase(this);
+        local.openDatabase();
+        //   local.openDatabase();
+
+        ApiInvoker.getResponse(GetTableURL + "Users" + "?filter=Email=" + login.getEmail() + "",
+                AppConstants.TokenHeader + mySessionId + "\n" + AppConstants.APIKey, null, new ApiInvoker.OnJSONResponseCallback() {
+                    @Override
+                    public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException, ApiException {
+
+                        result = response.toString();
+                        if (result.length()>15)
+                        {
+
+                            user = ((User) JSONParse.parseJSON(result, User.class).get(0));
+                         //   JSONArray employees = response.getJSONArray("resource");
+
+                        }
+                        // if no data found just go to main activity
+                        else {
+                            alertOk("Error", "Please login again.");
+                            resetLogin();
+                        }
+                    }
+
+                    @Override
+                    public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
+
+                        Error = response.toString();
+                        try {
+                            Error = jsonError(Error);
+                            alertOk("Error",Error);
+                            resetLogin();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+    }
 
     public String jsonError(String res) throws JSONException {
 
@@ -362,7 +448,12 @@ public class Global extends Application implements AppConstants{
 
                                 if (mySession != null) {
 
+                                    GetUser();
+
                                     GetUserInfo();    // get all users that has MGRID == loginID
+
+
+
                                       //  user = ()
 
 
@@ -427,7 +518,7 @@ public class Global extends Application implements AppConstants{
 
                 result = response.toString();
                 if (result != null) {
-                    alertOk("Alert","You are registered Sucessfully");
+
                     PostUser();
                   //  resetLogin();
 
@@ -438,7 +529,12 @@ public class Global extends Application implements AppConstants{
             @Override
             public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
                 result = response.toString();
-                alertOk("Error","");
+                try {
+                    Error = jsonError(result);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                alertOk("Error", Error);
             }
         });
         } catch (UnsupportedEncodingException e) {
@@ -451,11 +547,17 @@ public class Global extends Application implements AppConstants{
 
     public void PostUser()
     {
+        loc = new Loc();
+        loc.setCoordinates(getLoc(0,0));
+        loc.setType("Point");
+        user.setLoc(loc);
         Gson gson = new GsonBuilder().create();
         String json = gson.toJson(user);
+        String json2 = "{\"resource\":["+json+"]}";
+
         StringEntity userEntity = null;
         try {
-            userEntity = new StringEntity(json);
+            userEntity = new StringEntity(json2);
 
 
             ApiInvoker.Post(GetTableURL+ "users", TokenHeader + mySessionId + "\n" + APIKey,
@@ -463,11 +565,14 @@ public class Global extends Application implements AppConstants{
                         @Override
                         public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException {
 
+                            result = response.toString();
+                            alertOk("Alert","You are registered Sucessfully");
                         }
 
                         @Override
                         public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
-
+                            result = response.toString();
+                            alertOk("Error","Please retry");
                         }
                     });
         } catch (InterruptedException e) {
@@ -486,6 +591,7 @@ public class Global extends Application implements AppConstants{
             public void run() {
 
                  //   getActivity().invalidateOptionsMenu();
+
                     ProgressBar progressBar = (ProgressBar) activity.findViewById(R.id.progressBar);
                     progressBar.setVisibility(View.INVISIBLE);
 

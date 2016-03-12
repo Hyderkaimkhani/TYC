@@ -40,7 +40,7 @@ public class ApiInvoker extends Activity {
 
 
 	public interface OnJSONResponseCallback {
-		public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException;
+		public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException, ApiException;
 		public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error);
 	}
 
@@ -131,6 +131,8 @@ public class ApiInvoker extends Activity {
 
 				} catch (JSONException e) {
 					e.printStackTrace();
+				} catch (ApiException e) {
+					e.printStackTrace();
 				}
 
 
@@ -181,8 +183,10 @@ public class ApiInvoker extends Activity {
 
 				} catch (JSONException e) {
 					e.printStackTrace();
+				} catch (ApiException e) {
+					e.printStackTrace();
 				}
-			//	Log.w("Response : ", new String(responseBody));
+				//	Log.w("Response : ", new String(responseBody));
 			}
 
 			@Override
@@ -218,6 +222,8 @@ public class ApiInvoker extends Activity {
 					Log.w("Response : ", new String(responseBody));
 					callback.onJSONSuccessResponse(true, object);
 				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (ApiException e) {
 					e.printStackTrace();
 				}
 
@@ -258,6 +264,8 @@ public class ApiInvoker extends Activity {
 					Log.w("Response : ", new String(responseBody));
 					callback.onJSONSuccessResponse(true, object);
 				} catch (JSONException e) {
+					e.printStackTrace();
+				} catch (ApiException e) {
 					e.printStackTrace();
 				}
 

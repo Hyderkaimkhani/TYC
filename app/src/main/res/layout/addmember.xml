@@ -8,22 +8,25 @@
     <EditText
         android:layout_width="300sp"
         android:layout_height="50sp"
-        android:id="@+id/editText"
+        android:id="@+id/searchbox"
         android:drawableRight="@drawable/search"
+        android:drawablePadding="10dp"
         android:background="@drawable/edittext"
-        android:layout_above="@+id/button"
+        android:layout_above="@+id/btn_search"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="20dp"
+        android:hint="Search"
+        android:paddingLeft="10dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search"
-        android:id="@+id/button"
-        android:layout_centerVertical="true"
+        android:id="@+id/btn_search"
         android:background="@drawable/button"
-        android:layout_centerHorizontal="true"
-        android:textColor="#FFF" />
+        android:textColor="#FFF"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
