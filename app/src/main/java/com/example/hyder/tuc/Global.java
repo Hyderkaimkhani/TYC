@@ -451,13 +451,7 @@ public class Global extends Application implements AppConstants{
                                     GetUser();
 
                                     GetUserInfo();    // get all users that has MGRID == loginID
-
-
-
                                       //  user = ()
-
-
-
                                /*         if (!googleApiClient.isConnected())
                                             googleApiClient.connect();*/
 

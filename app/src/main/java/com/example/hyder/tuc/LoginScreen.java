@@ -65,17 +65,22 @@ public class LoginScreen extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               global.loginuser = true;
-               UserID = userid.getText().toString();
-               UserPass = password.getText().toString();
+
+               if (global.isNetworkAvailable())
+               {global.loginuser = true;
+                   UserID = userid.getText().toString();
+                   UserPass = password.getText().toString();
                /* if(str_user.equals("") || str_pass.equals(""))
                 {
 
                 }*/
 
-                btn_login.setVisibility(View.INVISIBLE);
-                progressBar.setVisibility(View.VISIBLE);
-                global.LoginUser(UserID,UserPass);
+                   btn_login.setVisibility(View.INVISIBLE);
+                   progressBar.setVisibility(View.VISIBLE);
+                   global.LoginUser(UserID,UserPass);
+               }
+              //  else
+
 
 
 

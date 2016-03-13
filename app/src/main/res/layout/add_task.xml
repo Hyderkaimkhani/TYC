@@ -12,7 +12,7 @@
         android:textSize="20dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="70dp"
         android:id="@+id/textView8"
         android:textStyle="bold"
         android:layout_marginBottom="10dp" />
@@ -33,6 +33,7 @@
             android:background="@drawable/edittext"
             android:hint="Subject"
             android:paddingStart="10dp"
+            android:singleLine="true"
             android:maxLines="1" />
 
         <EditText
@@ -46,6 +47,7 @@
             android:background="@drawable/edittext"
             android:hint="Summary"
             android:paddingStart="10dp"
+            android:singleLine="true"
             android:maxLines="2" />
 
         <EditText
@@ -53,7 +55,7 @@
             android:layout_height="40dp"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/assignetTo"
+            android:id="@+id/assignedTo"
             android:layout_below="@+id/summary"
             android:layout_alignEnd="@+id/summary"
             android:layout_alignStart="@+id/summary"
@@ -61,6 +63,7 @@
             android:background="@drawable/edittext"
             android:hint="Assigned to (Email)"
             android:paddingStart="10dp"
+            android:singleLine="true"
             android:maxLines="1" />
 
         <EditText
@@ -70,11 +73,12 @@
             android:ems="10"
             android:id="@+id/startdate"
             android:layout_centerVertical="true"
-            android:layout_alignStart="@+id/assignetTo"
-            android:layout_alignEnd="@+id/assignetTo"
+            android:layout_alignStart="@+id/assignedTo"
+            android:layout_alignEnd="@+id/assignedTo"
             android:layout_marginTop="10dp"
             android:background="@drawable/edittext"
             android:paddingStart="10dp"
+            android:singleLine="true"
             android:hint="Start Date"
             android:maxLines="1" />
 
@@ -90,6 +94,7 @@
             android:layout_alignEnd="@+id/startdate"
             android:background="@drawable/edittext"
             android:paddingStart="10dp"
+            android:singleLine="true"
             android:hint="End Date"
             android:maxLines="1" />
 
@@ -97,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submit"
-            android:id="@+id/button"
+            android:id="@+id/btn_addtask"
             android:layout_below="@+id/enddate"
             android:layout_marginTop="20dp"
             android:layout_alignStart="@+id/enddate"
@@ -105,6 +110,14 @@
             android:background="@drawable/button"
             android:textColor="#FFF"
             android:textStyle="bold" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar2"
+            android:layout_alignTop="@+id/btn_addtask"
+            android:layout_centerHorizontal="true"
+            android:indeterminate="false" />
 
     </RelativeLayout>
 
