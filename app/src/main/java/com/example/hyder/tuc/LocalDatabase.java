@@ -64,7 +64,7 @@ public class LocalDatabase {
             "create table "+PERSONS_TABLE +" ("+ Person_ROWID +" text primary key, "
                     +Person_ID +" text ,"+ Person_email +" text not null,"+ Person_Fname +" text not null,"+ Person_Lname +
                     " text not null,"+Person_Company+" text,"+Person_MgrID+" text,"+Person_Rating+" text," +Person_Password+
-                    " text,"+Person_Lat+" text,"+ Person_Long +" text,UNIQUE("+Person_ROWID+") ON CONFLICT REPLACE)";
+                    " text,"+Person_Lat+" text,"+ Person_Long +" text,UNIQUE("+Person_email+") ON CONFLICT REPLACE)";
 
     private static final String CREATE_TASKS_TABLE =
             "create table "+TASKS_TABLE+" ("+ Task_ROWID +" text primary key, "

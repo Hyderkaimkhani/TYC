@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.hyder.tuc.AddTask;
 import com.example.hyder.tuc.ViewMember;
+import com.example.hyder.tuc.ViewTask;
 import com.example.hyder.tuc.addmember;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
@@ -29,6 +30,8 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
             case 2:
                 // Movies fragment activity
                 return new AddTask();
+            case 3:
+                return new ViewTask();
 
         }
 
@@ -38,7 +41,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // get item count - equal to number of tabs
-        return 3;
+        return 4;
     }
 
 }

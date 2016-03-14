@@ -26,7 +26,14 @@ public class ViewTask extends Fragment {
     String result;
 
     public ViewTask() {
+       // Global global;
+        /*global = (Global) getActivity().getApplication();
+        global.setActivity(getActivity());
+        global.setContext(getActivity());
 
+        local = new LocalDatabase(getActivity());
+        local.openDatabase();
+       GetUserInfo();*/
         // Required empty public constructor
     }
 
@@ -40,7 +47,7 @@ public class ViewTask extends Fragment {
         global.setActivity(getActivity());
         global.setContext(getActivity());
 
-
+        GetUserInfo();
         return view;
     }
     public void GetUserInfo() {
@@ -49,7 +56,7 @@ public class ViewTask extends Fragment {
         local.openDatabase();
         //   local.openDatabase();
 
-        global.ApiInvoker.getResponse(AppConstants.GetTableURL + "tasks" + "?filter=AssignedTo=" + global.login.getEmail()+" or AssignedBy="+global.login.getEmail()+"",
+        global.ApiInvoker.getResponse(AppConstants.GetTableURL + "tasks" + "?filter=(AssignedTo=" + global.login.getEmail()+") or (AssignedBy="+global.login.getEmail()+")",
                 AppConstants.TokenHeader + global.mySessionId + "\n" + AppConstants.APIKey, null, new ApiInvoker.OnJSONResponseCallback() {
                     @Override
                     public void onJSONSuccessResponse(boolean success, JSONObject response) throws JSONException {
@@ -81,10 +88,34 @@ public class ViewTask extends Fragment {
                                 local.InsertEmployee(id,email,Fname,Lname,Company,MgrID,Rating,lat,lng);
                             }
                         }
+         /*               if (result.length()>15)
+                        {
+
+                            //    user = ((User) JSONParse.parseJSON(result, User.class).get(0));
+
+
+                            JSONArray employees = response.getJSONArray("resource");
+                            for (int i=0; i<employees.length(); i++) {
+                                JSONObject person = employees.getJSONObject(i);
+                                id = person.getString("_id");
+                                email = person.getString("Email");
+                                Fname = person.getString("FName");
+                                Lname = person.getString("LName");
+                                Company = person.getString("Company");
+                                MgrID = person.getString("MgrID");
+                                Rating = person.getString("Rating");
+                                JSONArray location = person.getJSONObject("loc").getJSONArray("coordinates");;
+                                lat = location.get(0).toString();
+                                lng = location.get(1).toString();
+
+
+                                local.InsertEmployee(id,email,Fname,Lname,Company,MgrID,Rating,lat,lng);
+                            }
+                        }
                         // if no data found just go to main activity
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+                        startActivity(intent);*/
 
                     }
 
