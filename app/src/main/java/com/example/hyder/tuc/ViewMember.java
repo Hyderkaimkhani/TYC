@@ -27,8 +27,8 @@ public class  ViewMember extends Fragment {
   //  Login login = new Login();
     String email;
     Global global;
-    ArrayList<String> Name = new ArrayList<>();
-    ArrayList<String> Email = new ArrayList<>();
+    ArrayList<String> Name;
+    ArrayList<String> Email;
     ListView listView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +47,8 @@ public class  ViewMember extends Fragment {
         global.setActivity(getActivity());
         global.setContext(getActivity());
         listView = (ListView) rootView.findViewById(R.id.listView);
+        Name = new ArrayList<>();
+        Email = new ArrayList<>();
 
         email = global.login.getEmail();
 

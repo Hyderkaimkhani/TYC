@@ -109,18 +109,15 @@
             android:layout_toEndOf="@+id/space3" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="Delete Member"
             android:id="@+id/button"
-            android:layout_below="@+id/textView7"
-            android:layout_marginTop="10dp"
             android:background="@drawable/button"
             android:textColor="#FFF"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp" />
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 

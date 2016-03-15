@@ -1,6 +1,7 @@
 package com.example.hyder.tuc;
 
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
@@ -8,6 +9,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import TabView.TabsPagerAdapter;
 
@@ -100,5 +104,29 @@ public class MainActivity extends AppCompatActivity {
         } else {
             getFragmentManager().popBackStack();
         }*/
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.custom_menu, menu);
+        return true;
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+
+            case R.id.logout:
+                Intent intent = new Intent(this,LoginScreen.class);
+                startActivity(intent);
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

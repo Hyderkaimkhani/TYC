@@ -19,14 +19,15 @@
         android:paddingLeft="10dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Add"
         android:id="@+id/btn_search"
         android:background="@drawable/button"
         android:textColor="#FFF"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignEnd="@+id/searchbox"
+        android:layout_alignStart="@+id/searchbox" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,7 +35,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Add Member"
         android:id="@+id/textView2"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textStyle="bold" />

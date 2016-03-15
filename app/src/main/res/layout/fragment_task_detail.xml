@@ -1,0 +1,222 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/taskdetail"
+    android:background="@color/cayan200"
+    tools:context="com.example.hyder.tuc.TaskDetail">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="6dp"
+        android:background="@drawable/layout_task"
+        android:id="@+id/relativeLayout2">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:fillViewport="false"
+            android:background="@color/cayan50">
+
+        </ScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Subject"
+            android:id="@+id/textView10"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/subject"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/textView10"
+            android:layout_toEndOf="@+id/space5"
+            android:layout_marginRight="5dp"
+            android:text="subject" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Summary"
+            android:id="@+id/textView11"
+            android:layout_below="@+id/subject"
+            android:layout_alignLeft="@+id/textView10"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/summary"
+            android:layout_alignTop="@+id/textView11"
+            android:layout_alignStart="@+id/subject"
+            android:text="summary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Assigned To"
+            android:id="@+id/textView12"
+            android:layout_below="@+id/summary"
+            android:layout_alignLeft="@+id/textView10"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="assign to"
+            android:id="@+id/assignedTo"
+            android:layout_alignTop="@+id/textView12"
+            android:layout_alignStart="@+id/summary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Assigned By"
+            android:id="@+id/textView13"
+            android:layout_below="@+id/assignedTo"
+            android:layout_alignLeft="@+id/textView10"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="assignee"
+            android:id="@+id/assignedBy"
+            android:layout_alignTop="@+id/textView13"
+            android:layout_alignStart="@+id/assignedTo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Start Date"
+            android:id="@+id/textView15"
+            android:layout_below="@+id/assignedBy"
+            android:layout_alignLeft="@+id/textView10"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Date"
+            android:id="@+id/start_date"
+            android:layout_alignTop="@+id/textView15"
+            android:layout_alignStart="@+id/assignedBy" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="End Date"
+            android:id="@+id/textView16"
+            android:layout_below="@+id/start_date"
+            android:layout_alignLeft="@+id/textView10"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="date"
+            android:id="@+id/end_date"
+            android:layout_alignTop="@+id/textView16"
+            android:layout_alignStart="@+id/start_date" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Status"
+            android:id="@+id/textView17"
+            android:layout_below="@+id/end_date"
+            android:layout_alignLeft="@+id/textView10"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="status"
+            android:id="@+id/status"
+            android:layout_alignTop="@+id/textView17"
+            android:layout_alignStart="@+id/end_date"
+            android:layout_marginBottom="30dp" />
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="20px"
+            android:layout_below="@+id/textView12"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/space5" />
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:id="@+id/button2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/relativeLayout2"
+        android:layout_marginBottom="20dp"
+        android:layout_toStartOf="@+id/space6"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/button"
+        android:textColor="#FFF" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_alignTop="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/space6" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:id="@+id/button3"
+        android:layout_alignTop="@+id/button2"
+        android:layout_alignEnd="@+id/relativeLayout2"
+        android:layout_toEndOf="@+id/space6"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/button"
+        android:textColor="#FFF" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Task Detail"
+        android:id="@+id/textView14"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:textStyle="bold" />
+</RelativeLayout>

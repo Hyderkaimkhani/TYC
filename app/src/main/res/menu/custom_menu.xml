@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.stationcars.hv.OriginScreen">
+
+    <item android:id="@+id/main"
+        android:icon="@drawable/menu"
+        android:title=""
+        app:showAsAction="always">
+
+        <menu>
+
+            <!--<item android:id="@+id/action_day"
+                android:title="@string/action_daytheme"
+                android:icon="@drawable/daytheme"
+                app:showAsAction="never" />
+
+            <item android:id="@+id/action_night"
+                android:title="@string/action_nighttheme"
+                android:icon="@drawable/nighttheme"
+                app:showAsAction="never" />-->
+
+            <item android:id="@+id/logout"
+                android:title="Logout"
+                app:showAsAction="never" />
+
+
+
+        </menu>
+
+    </item>
+
+</menu>

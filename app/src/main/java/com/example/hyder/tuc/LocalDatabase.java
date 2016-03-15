@@ -64,7 +64,7 @@ public class LocalDatabase {
             "create table "+PERSONS_TABLE +" ("+ Person_ROWID +" text primary key, "
                     +Person_ID +" text ,"+ Person_email +" text not null,"+ Person_Fname +" text not null,"+ Person_Lname +
                     " text not null,"+Person_Company+" text,"+Person_MgrID+" text,"+Person_Rating+" text," +Person_Password+
-                    " text,"+Person_Lat+" text,"+ Person_Long +" text,UNIQUE("+Person_email+") ON CONFLICT REPLACE)";
+                    " text,"+Person_Lat+" text,"+ Person_Long +" text,UNIQUE("+Person_ROWID+") ON CONFLICT REPLACE)";
 
     private static final String CREATE_TASKS_TABLE =
             "create table "+TASKS_TABLE+" ("+ Task_ROWID +" text primary key, "
@@ -138,7 +138,7 @@ public class LocalDatabase {
     }
 
     public long InsertTask (String id,String subject,String summary,String assignedby, String assignedto,
-                            String status,String date,String EndDate, String lat , String lon )
+                            String status,String date,String EndDate )
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put(Task_ROWID, id);
@@ -149,8 +149,8 @@ public class LocalDatabase {
         initialValues.put(Task_Date, date);
         initialValues.put(Task_EndDate, EndDate);
         initialValues.put(Task_Status, status);
-        initialValues.put(Task_Lat, lat);
-        initialValues.put(Task_Long, lon);
+       /* initialValues.put(Task_Lat, lat);
+        initialValues.put(Task_Long, lon);*/
 
         return sqLiteDatabase.insert(TASKS_TABLE, null, initialValues);
     }
@@ -163,6 +163,16 @@ public class LocalDatabase {
         }
         return mCursor;
     }
+
+    public Cursor getTask(String id)
+    {
+        Cursor mCursor = sqLiteDatabase.rawQuery("SELECT subject,summary,assignedby,assignedto,startdate,enddate,status FROM tasks WHERE _id='"+id+"' ",null);
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+
 
     public Cursor getProfile(String email)
     {
