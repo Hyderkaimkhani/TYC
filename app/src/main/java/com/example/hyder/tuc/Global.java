@@ -6,15 +6,22 @@ import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.Api;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.json.JSONArray;
@@ -43,26 +50,32 @@ import TYC.Login;
  */
 
 
-public class Global extends Application implements AppConstants{
+public class Global extends Application implements AppConstants,LocationListener,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener{
 
     private Context context = null;
     private Activity activity = null;
-    String result = null;
-    String Error = null;
+
     public LocalDatabase local;
     public User user = new User();
     public Loc loc = new Loc();
-    private Task task;
     public static Session mySession;
     public static String mySessionId;
-    RegisterUser registerUser = new RegisterUser();
-//    User user = new User();
-    Login login = new Login();
-    ApiInvoker ApiInvoker = new ApiInvoker();
     public boolean loginuser = false;
-    String FName,LName,email,company,password,confirmPassword;
     public TextToSpeech textToSpeech;
     public static String selectedmember;
+
+    private GoogleApiClient mGoogleApiClient;
+    private Location mCurrentLocation;
+    private LocationRequest mLocationRequest;
+
+    String result = null;
+    String Error = null;
+    RegisterUser registerUser = new RegisterUser();
+    Login login = new Login();
+    ApiInvoker ApiInvoker = new ApiInvoker();
+    String FName,LName,email,company,password,confirmPassword;
 
     public Context getContext() {
         return context != null ? context : null;
@@ -183,8 +196,24 @@ public class Global extends Application implements AppConstants{
         }
     }
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-    public void getSession() throws JSONException {
+    }
+
+    public void initApp() {
+
+        mGoogleApiClient = new GoogleApiClient.Builder( getActivity() )
+                .addConnectionCallbacks( this )
+                .addOnConnectionFailedListener( this )
+                .addApi( LocationServices.API )
+                .build();
+        mGoogleApiClient.connect();
+    }
+
+
+        public void getSession() throws JSONException {
 
         JSONObject credential = new JSONObject();
 
@@ -380,6 +409,13 @@ public class Global extends Application implements AppConstants{
                         {
 
                             user = ((User) JSONParse.parseJSON(result, User.class).get(0));
+                         /*   loc = new Loc();
+                            loc.setCoordinates(getLoc(currentlocation.getLongitude(),currentlocation.getLatitude()));
+                            loc.setType("Point");
+                            user.setLoc(loc);
+*/
+                          //  updateUser();
+
                          //   JSONArray employees = response.getJSONArray("resource");
 
                         }
@@ -405,6 +441,49 @@ public class Global extends Application implements AppConstants{
                 });
 
     }
+
+    public void updateUser(){
+
+        loc = new Loc();
+        loc.setCoordinates(getLoc(mCurrentLocation.getLongitude(),mCurrentLocation.getLatitude()));
+        loc.setType("Point");
+        user.setLoc(loc);
+       // JSONObject mgrid = new JSONObject();
+        try {
+           // mgrid.put("MgrID",login.getEmail());
+           // String json = "{\"resource\":["+mgrid.toString()+"]}";
+
+          //  StringEntity entity = new StringEntity(json);
+
+            //    String json2 = "{\"resource\":["+mgrid+"]}";
+
+            Gson gson = new GsonBuilder().create();
+            String json = gson.toJson(user);
+            StringEntity userEntity = new StringEntity(json);
+
+            ApiInvoker.patch(GetTableURL + "users" + "/" + user.getId(),
+                    AppConstants.TokenHeader+ mySessionId + "\n" + APIKey, userEntity, ContentType,
+                    new ApiInvoker.OnJSONResponseCallback() {
+                        @Override
+                        public void onJSONSuccessResponse(boolean success, JSONObject response) {
+
+                            result = response.toString();
+                            Toast.makeText(getActivity(),"Succeded",Toast.LENGTH_SHORT).show();
+                           // searchbox.setText("");
+                        }
+
+                        @Override
+                        public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
+                            result = response.toString();
+                            Toast.makeText(getActivity(),"Failure",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public String jsonError(String res) throws JSONException {
 
@@ -432,6 +511,7 @@ public class Global extends Application implements AppConstants{
             Gson gson = new GsonBuilder().create();
             String json = gson.toJson(login);
             StringEntity LoginEntity = null;
+         //   currentlocation = mapFragment.mCurrentLocation;
             try {
                 LoginEntity = new StringEntity(json);
                 ApiInvoker.Post(SessionURL, APIKey, LoginEntity, ContentType, new ApiInvoker.OnJSONResponseCallback() {
@@ -448,12 +528,16 @@ public class Global extends Application implements AppConstants{
 
                                 if (mySession != null) {
 
+
+
                                     GetUser();
 
                                     GetUserInfo();    // get all users that has MGRID == loginID
                                       //  user = ()
                                /*         if (!googleApiClient.isConnected())
                                             googleApiClient.connect();*/
+
+                                    initApp();
 
                                 } else {
                                     alertOk("Login Error", ApiInvoker.response + " Please retry.");
@@ -473,14 +557,10 @@ public class Global extends Application implements AppConstants{
 
                     @Override
                     public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
-                        Error = response.toString();
-                        try {
-                            Error = jsonError(Error);
-                            alertOk("Error", Error);
-                            resetLogin();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    //    Error = response.toString();
+                        //   Error = jsonError(Error);
+                        alertOk("Error", "Try Again");
+                        resetLogin();
                     }
                 });
 
@@ -623,5 +703,29 @@ public class Global extends Application implements AppConstants{
 
 
         });
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mCurrentLocation == null) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        mCurrentLocation = location;
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
     }
 }

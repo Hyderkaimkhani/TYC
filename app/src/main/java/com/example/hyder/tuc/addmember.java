@@ -42,6 +42,8 @@ public class addmember extends Fragment {
         searchbox = (EditText) rootView.findViewById(R.id.searchbox);
         button = (Button) rootView.findViewById(R.id.btn_search);
 
+        global.updateUser();
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

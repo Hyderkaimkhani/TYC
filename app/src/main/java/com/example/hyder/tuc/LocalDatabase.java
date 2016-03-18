@@ -176,7 +176,7 @@ public class LocalDatabase {
 
     public Cursor getProfile(String email)
     {
-        Cursor mCursor = sqLiteDatabase.rawQuery("SELECT Fname , Lname, Email,Company,Rating FROM persons WHERE Email='"+email+"' ",null);
+        Cursor mCursor = sqLiteDatabase.rawQuery("SELECT Fname , Lname, Email,Company,Rating,Loc_Lat,Loc_Long FROM persons WHERE Email='"+email+"' ",null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }

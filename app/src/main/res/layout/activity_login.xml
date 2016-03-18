@@ -37,6 +37,8 @@
                 android:background="@drawable/background"
                  />
 
+
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -44,7 +46,18 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_collapseMode="pin"
                 android:title="Hellooooo"/>
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="+Create Account"
+                app:layout_collapseMode="parallax"
+                android:id="@+id/tv_signup"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:textColor="#b4b4b4" />
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
@@ -162,17 +175,7 @@
 
 
     </android.support.v4.widget.NestedScrollView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginTop="5dp"
-        android:text="+Create Account"
-        app:layout_collapseMode="parallax"
-        android:id="@+id/tv_signup"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:textColor="#b4b4b4" />
+
 
 </android.support.design.widget.CoordinatorLayout>
 

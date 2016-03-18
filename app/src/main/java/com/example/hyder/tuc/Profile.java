@@ -2,6 +2,7 @@ package com.example.hyder.tuc;
 
 import android.app.FragmentManager;
 import android.database.Cursor;
+import android.location.Location;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
@@ -13,11 +14,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import TYC.Loc;
+
 
 public class Profile extends Fragment {
 
     TextView name,email,company,rating;
     String Name,Email,Company,Rating;
+
+    public static double lat;
+    public static  double lon;
 
     //private OnFragmentInteractionListener mListener;
 
@@ -36,8 +44,22 @@ public class Profile extends Fragment {
         company = (TextView) view.findViewById(R.id.company);
         rating = (TextView) view.findViewById(R.id.rating);
         Email = getArguments().getString("email");
+
+        //MapFragment mapFragment = new MapFragment();
+
+        LatLng locaton;
+
+/*
+        Location newLoc = new Location("");
+        newLoc.setLatitude(lat);
+        newLoc.setLongitude(lon);*/
+
+//        mapFragment.initCamera(newLoc);
+
         final LocalDatabase localdb = new LocalDatabase(getActivity());
         localdb.openDatabase();
+
+
 
         Cursor c =localdb.getProfile(Email);
 
@@ -48,6 +70,9 @@ public class Profile extends Fragment {
                 email.setText(c.getString(2));
                 company.setText(c.getString(3));
                 rating.setText(c.getString(4));
+                lat = Double.parseDouble(c.getString(5));
+                lon = Double.parseDouble(c.getString(6));
+
 
             }while (c.moveToNext());
 
@@ -55,6 +80,8 @@ public class Profile extends Fragment {
         else{
            // Toast.makeText(getActivity().getApplicationContext(),"No Employee",Toast.LENGTH_LONG).show();
         }
+      /*  lat = 24.876379;
+        lon =  67.062956;*/
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();

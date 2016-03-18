@@ -39,12 +39,14 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         GoogleMap.OnMarkerClickListener,LocationListener
         {
 
+
     private GoogleApiClient mGoogleApiClient;
     private Location mCurrentLocation;
   //  private final long interval = 30000;
     private LocationRequest mLocationRequest;
-    private String Address = "15 Bath Road, Hounslow, United Kingdom";
+ //   private String Address = "15 Bath Road, Hounslow, United Kingdom";
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+            Profile profile ;
 
 
     private final int[] MAP_TYPES = { GoogleMap.MAP_TYPE_SATELLITE,
@@ -66,7 +68,25 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
                 .addOnConnectionFailedListener( this )
                 .addApi( LocationServices.API )
                 .build();
-        mGoogleApiClient.connect();
+
+        new Thread(){
+            @Override
+            public void run() {
+
+                try {
+                    Thread.sleep(3000L);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    mGoogleApiClient.connect();
+                }
+                catch (Exception e) {
+
+                }
+            }
+        }.start();
+
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(10 * 1000)        // 10 seconds, in milliseconds
@@ -77,9 +97,9 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
     @Override
     public void onStart() {
         super.onStart();
-        mGoogleApiClient.connect();
+        //mGoogleApiClient.connect();
 
-      LatLng location=getLocationFromAddress(getActivity(),Address);
+       /* LatLng location=getLocationFromAddress(getActivity(),Address);
         double lat = location.latitude;
         double lon = location.longitude;
 
@@ -87,7 +107,7 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         newLoc.setLatitude(lat);
         newLoc.setLongitude(lon);
 
-        initCamera(newLoc);
+        initCamera(newLoc);*/
     }
 
     @Override
@@ -104,14 +124,31 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         getMap().setOnInfoWindowClickListener( this );
         getMap().setOnMapClickListener(this);
     }
-    private void initCamera( Location location ) {
+
+
+    public void initCamera( Location location ) {
+
+
+
+        // LatLng loc = new LatLng(profile.lat,profile.lon);
+
+        Location location1 = new Location("");
+        location1.setLatitude(profile.lat);
+        location1.setLongitude(profile.lon);
+/*
+        Location newLoc = new Location("");
+        newLoc.setLatitude(profile.lat);
+        newLoc.setLongitude(profile.lon);*/
+
         CameraPosition position = CameraPosition.builder()
-                .target( new LatLng( location.getLatitude(),
-                        location.getLongitude() ) )
+                .target( new LatLng( location1.getLatitude(),
+                        location1.getLongitude() ) )
                 .zoom( 16f )
                 .bearing( 0.0f )
                 .tilt( 0.0f )
                 .build();
+       // getMap().animateCamera(CameraUpdateFactory.zoomTo(13), 2000, null);
+
 
         getMap().animateCamera( CameraUpdateFactory
                 .newCameraPosition( position ), null );
@@ -121,14 +158,18 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         getMap().setMyLocationEnabled( true );
         getMap().getUiSettings().setZoomControlsEnabled( true );
 
-        MarkerOptions marker = new MarkerOptions().position(new LatLng(location.getLatitude(),location.getLongitude()));
-        marker.title( getAddressFromLatLng(new LatLng(location.getLatitude(),location.getLongitude())) );
+        // Here is setting the marker
+        MarkerOptions marker = new MarkerOptions().position(new LatLng(profile.lat,profile.lon));
+        //  marker.title( getAddressFromLatLng(new LatLng(location.getLatitude(),location.getLongitude())) );
 
         marker.icon( BitmapDescriptorFactory.defaultMarker());
-                getMap().addMarker( marker );
+        getMap().addMarker( marker );
+
+
     }
 
-            private void CameraUpdate( Location location ) {
+
+    private void CameraUpdate( Location location ) {
                 CameraPosition position = CameraPosition.builder()
                         .target( new LatLng( location.getLatitude(),
                                 location.getLongitude() ) )
@@ -154,8 +195,10 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
                 LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
             }
             else {
-                initCamera( mCurrentLocation );
+               // initCamera( mCurrentLocation );
             }
+        initCamera(mCurrentLocation);
+
     }
 
     @Override
@@ -169,7 +212,7 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
 
     }
 
-    @Override
+/*    @Override
     public void onMapClick(LatLng latLng) {
         MarkerOptions options = new MarkerOptions().position( latLng );
         options.title( getAddressFromLatLng( latLng ) );
@@ -190,9 +233,9 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
         }
 
         return address;
-    }
+    }*/
 
-            public LatLng getLocationFromAddress(Context context, String strAddress) {
+          /*  public LatLng getLocationFromAddress(Context context, String strAddress) {
 
                 Geocoder coder = new Geocoder(context);
                 List<Address> address;
@@ -216,7 +259,7 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
 
                 return p1;
             }
-
+*/
     @Override
     public void onMapLongClick(LatLng latLng) {
 
@@ -229,7 +272,7 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
 
     @Override
     public void onLocationChanged(Location location) {
-            initCamera(location);
+          //  initCamera(location);
         }
 
     @Override
@@ -245,4 +288,9 @@ public class MapFragment extends SupportMapFragment implements GoogleApiClient.C
                     Log.i("", "Location services connection failed with code " + connectionResult.getErrorCode());
                 }
     }
-}
+
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+            }
+        }
