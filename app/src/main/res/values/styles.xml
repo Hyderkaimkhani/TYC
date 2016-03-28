@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionOverflowMenuStyle">@style/OptionsMenuColor</item>
 
     </style>
 
@@ -15,7 +16,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-
+    </style>
+    <style name="OptionsMenuColor" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:popupBackground">@color/cayan50</item>
     </style>
 
 </resources>

@@ -19,7 +19,7 @@ public class Login {
     }
 
     public void setEmail(String email) {
-        this.email = "john@tyc.com";
+        this.email = email;
     }
 
     public String getPassword() {
@@ -27,7 +27,7 @@ public class Login {
     }
 
     public void setPassword(String password) {
-        this.password = "123456";
+        this.password = password;
     }
 
 

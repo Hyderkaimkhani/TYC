@@ -58,18 +58,18 @@ public class SignUp extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
         public void onClick(View v) {
-       /* FName = Fname.getText().toString();
+        FName = Fname.getText().toString();
         LName=Lname.getText().toString();
         email=Email.getText().toString();
         company= Company.getText().toString();
         password=Password.getText().toString();
-        confirmPassword = ConfirmPassword.getText().toString();*/
-                FName = "amjad";
+        confirmPassword = ConfirmPassword.getText().toString();
+               /* FName = "amjad";
                 LName="ali";
                 email="115@tyc.com";
                 company= "test";
                 password="123456";
-                confirmPassword ="123456";
+                confirmPassword ="123456";*/
                 progressBar.setVisibility(View.VISIBLE);
                 btn_submit.setVisibility(View.INVISIBLE);
 
@@ -118,4 +118,6 @@ public class SignUp extends AppCompatActivity {
 });
 
     }
+
+
 }

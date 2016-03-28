@@ -76,6 +76,7 @@ public class addmember extends Fragment {
                             result = response.toString();
                             Toast.makeText(getActivity(),"Succeded",Toast.LENGTH_SHORT).show();
                             searchbox.setText("");
+                            global.GetUserInfo();
                         }
 
                         @Override

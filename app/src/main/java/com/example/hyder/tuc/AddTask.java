@@ -31,7 +31,7 @@ import cz.msebera.android.httpclient.entity.StringEntity;
 public class AddTask extends Fragment {
     EditText subject,summary,assigned_to,start_date,end_date;
     Button submit;
-    String Subject,Summary,AssignedTo,StartDate,EndDate,result;
+    String Subject,Summary,AssignedTo,StartDate,EndDate,result,id,status,AssignedBy;
     ProgressBar progressBar;
     Task task;
     Global global;
@@ -67,15 +67,18 @@ public class AddTask extends Fragment {
                 AssignedTo = assigned_to.getText().toString();
                 StartDate = start_date.getText().toString();
                 EndDate = end_date.getText().toString();
+                id = global.login.getEmail();
+                status = "Assigned";
+                AssignedBy = global.login.getEmail();
 
                 task = new Task();
                 task.setSubject(Subject);
                 task.setSummary(Summary);
                 task.setAssignedTo(AssignedTo);
-                task.setAssignedBy(global.login.getEmail());
+                task.setAssignedBy(AssignedBy);
                 task.setDate(StartDate);
                 task.setEndDate(EndDate);
-                task.setStatus("Assigned");
+                task.setStatus(status);
 
                 AddTask();
             }
@@ -109,7 +112,8 @@ public class AddTask extends Fragment {
                             result = response.toString();
                             submit.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.INVISIBLE);
-                            global.alertOk("Success", "Your task is added successfully Sucessfully");
+                            global.alertOk("Success", "Your task is added Successfully");
+                            global.local.InsertTask(id,subject.toString(),summary.toString(),AssignedBy,AssignedTo,status,StartDate,EndDate);
 
                             subject.setText("");
                             summary.setText("");
@@ -123,7 +127,7 @@ public class AddTask extends Fragment {
                             result = response.toString();
                             submit.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.INVISIBLE);
-                            global.alertOk("Error","Task is not added.Please retry");
+                            global.alertOk("Error","Task is not added. Please retry");
 
                             //resetSignUp();
                         }

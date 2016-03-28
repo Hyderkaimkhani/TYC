@@ -72,6 +72,7 @@ public class  ViewMember extends Fragment {
         }
         else{
             Toast.makeText(getActivity().getApplicationContext(),"No Employee",Toast.LENGTH_LONG).show();
+            global.GetUserInfo();
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

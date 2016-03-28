@@ -371,9 +371,9 @@ public class Global extends Application implements AppConstants,LocationListener
                                 }
                         }
                         // if no data found just go to main activity
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                           /* Intent intent = new Intent(getActivity(), MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
+                            startActivity(intent);*/
 
                     }
 
@@ -417,6 +417,10 @@ public class Global extends Application implements AppConstants,LocationListener
                           //  updateUser();
 
                          //   JSONArray employees = response.getJSONArray("resource");
+
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
 
                         }
                         // if no data found just go to main activity
@@ -468,14 +472,14 @@ public class Global extends Application implements AppConstants,LocationListener
                         public void onJSONSuccessResponse(boolean success, JSONObject response) {
 
                             result = response.toString();
-                            Toast.makeText(getActivity(),"Succeded",Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(getActivity(),"Succeded",Toast.LENGTH_SHORT).show();
                            // searchbox.setText("");
                         }
 
                         @Override
                         public void onJSONFailureResponse(boolean success, JSONObject response, int statusCode, Throwable error) {
                             result = response.toString();
-                            Toast.makeText(getActivity(),"Failure",Toast.LENGTH_SHORT).show();
+                         //   Toast.makeText(getActivity(),"Failure",Toast.LENGTH_SHORT).show();
                         }
                     });
         } catch (UnsupportedEncodingException e) {
@@ -642,6 +646,14 @@ public class Global extends Application implements AppConstants,LocationListener
 
                             result = response.toString();
                             alertOk("Alert","You are registered Sucessfully");
+                            Button btnsignup = (Button) activity.findViewById(R.id.btn_signup);
+                            if (btnsignup != null)
+                                btnsignup.setVisibility(View.VISIBLE);
+
+                            ProgressBar progressBar = (ProgressBar) activity.findViewById(R.id.signup_progressBar);
+                            if(progressBar!= null)
+                                progressBar.setVisibility(View.INVISIBLE);
+
                         }
 
                         @Override

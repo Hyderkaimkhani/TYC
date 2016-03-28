@@ -60,7 +60,7 @@ public class ViewTask extends Fragment {
 
         Subject  = new ArrayList<>();
         ID  = new ArrayList<>();
-        GetUserInfo();
+        GetTasks();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -96,7 +96,7 @@ public class ViewTask extends Fragment {
 
         return view;
     }
-    public void GetUserInfo() {
+    public void GetTasks() {
 
         local = new LocalDatabase(getActivity());
         local.openDatabase();
